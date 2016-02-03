@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Shop>
+    <goods id="1">
+        <category>Phones</category>
+        <description>Old phone</description>
+        <name>Iphone 5</name>
+        <price>23.5</price>
+    </goods>
+    <goods id="2">
+        <category>Phones</category>
+        <description>New phone</description>
+        <name>Iphone 6s</name>
+        <price>234234.555</price>
+    </goods>
+</Shop>
