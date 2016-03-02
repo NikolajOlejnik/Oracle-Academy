@@ -92,28 +92,22 @@ disclaimer: есть лишние импорты, на будущее)
   <property name="url" value="jdbc:mysql://localhost:3306/basename" />
   <property name="username" value="user" />
   <property name="password" value="pass" />
-
-	<bean id="sessionFactory"
+  
+  	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		
- <list>
-        <value>ua.oracleacademy.fp.domain</value>
-        <value>ua.oracleacademy.fp.domain.User</value>
-        <!--тут будут остальные entity, пока недописаны :-) -->:
-    </list>
-    
-    <property name="configurationClass">
+		<property name="configLocation">
+			<value>classpath:hibernate.cfg.xml</value>
+		</property>
+		<property name="configurationClass">
 			<value>org.hibernate.cfg.AnnotationConfiguration</value>
 		</property>
-		
 		<property name="hibernateProperties">
-			 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-        <prop key="hibernate.show_sql">true</prop>
-        <prop key="hibernate.format_sql">true</prop>
+			<props>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
 			</props>
 		</property>
-		
 	</bean>
 
 </beans>
@@ -155,5 +149,19 @@ disclaimer: есть лишние импорты, на будущее)
 	<context:component-scan base-package="ua.oracleacademy.fp.web" />
 	 
 </beans>
+
+6. <!--hibernate.cfg.xml. у меня лежит в src/resources-->
+
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<mapping class="ua.oracleacademy.fp.domain.User" />
+		<!--пока только один, буду дописывать)-->
+	</session-factory>
+</hibernate-configuration>
 
 <!--отдельные properties я начал выносить в отдельные конфигурационные файлы, чтобы потом проще и быстрее было менять db и т. д., но тут я всё захардкодил для наглядности-->
