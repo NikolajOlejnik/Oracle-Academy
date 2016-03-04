@@ -10,10 +10,6 @@
 	<title><spring:message code="label.title" /></title>
 </head>
 <body>
-
-<a href="<c:url value="/logout" />">
-	<spring:message code="label.logout" />
-</a>
   
 <h2><spring:message code="label.title" /></h2>
 
