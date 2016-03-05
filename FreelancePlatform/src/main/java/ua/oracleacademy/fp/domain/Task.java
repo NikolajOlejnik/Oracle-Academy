@@ -22,6 +22,28 @@ public class Task {
 	@Column(name = "PRICE")
 	private Double price;
 
+	@Column (name = "OWNER")
+	private Customer customer;
+
+	@Column (name = "FREELANCER")
+	private Freelancer freelancer;
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Freelancer getFreelancer() {
+		return freelancer;
+	}
+
+	public void setFreelancer(Freelancer freelancer) {
+		this.freelancer = freelancer;
+	}
+
 	public Task() {
 	}
 
