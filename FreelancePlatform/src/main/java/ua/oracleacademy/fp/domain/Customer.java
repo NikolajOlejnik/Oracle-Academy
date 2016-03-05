@@ -1,16 +1,13 @@
 package ua.oracleacademy.fp.domain;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@DiscriminatorValue("CUSTOMER")
-
 public class Customer extends User {
 
     @Column
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Task> orderHistory;
 
     public Customer() {

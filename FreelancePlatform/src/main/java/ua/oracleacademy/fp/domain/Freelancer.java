@@ -4,13 +4,13 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@DiscriminatorValue("Freelancer")
 public class Freelancer extends User {
 
 @Column(name = "SKILLS")
     private String skills;
 
     @Column
+    @OneToMany(fetch = FetchType.LAZY)
     private List <Task> workHistory;
 
     public Freelancer() {

@@ -15,37 +15,22 @@ public class Task {
 	@Column(name = "DESCRIPTION")
 	private String description;
 
-	@Column(name="CREATED")
+	@Column(name = "CREATED")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
 
 	@Column(name = "PRICE")
 	private Double price;
 
-	@Column (name = "OWNER")
 	private Customer customer;
 
-	@Column (name = "FREELANCER")
 	private Freelancer freelancer;
 
-	public Customer getCustomer() {
-		return customer;
-	}
+	@Column(name = "OWNER_ID")
+	private long customerId;
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-	public Freelancer getFreelancer() {
-		return freelancer;
-	}
-
-	public void setFreelancer(Freelancer freelancer) {
-		this.freelancer = freelancer;
-	}
-
-	public Task() {
-	}
+	@Column(name = "FREELANCER_ID")
+	private long freelancerId;
 
 	public Integer getId() {
 		return id;
@@ -77,5 +62,32 @@ public class Task {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+		this.customerId = customer.getId();
+	}
+
+	public Freelancer getFreelancer() {
+		return freelancer;
+	}
+
+	public void setFreelancer(Freelancer freelancer) {
+		this.freelancer = freelancer;
+		this.freelancerId = freelancer.getId();
+	}
+
+	public long getCustomerId() {
+		return customerId;
+	}
+
+
+	public long getFreelancerId() {
+		return freelancerId;
 	}
 }
