@@ -2,14 +2,20 @@ package ua.oracleacademy.fp.domain.users;
 
 public class Admin extends User {
 
-    private long        id;
-    private String      name;
-    private String      login;
-    private String      password;
-    private boolean     enabled;
-    private String      about;
+    private long id;
+    private String name;
+    private String login;
+    private String password;
+    private boolean enabled;
+    private String about;
 
     public Admin() {
+    }
+
+    public Admin(long user_id, String name, String login, String password, boolean enabled, String about) {
+    }
+
+    public Admin(long user_id, String name, String login, String password, boolean enabled) {
     }
 
     @Override
@@ -75,11 +81,11 @@ public class Admin extends User {
     @Override
     public String toString() {
         return "Admin["
-                +" id: "         + this.id
-                + ", login: "    + this.login
-                + ", name: "     + this.name
+                + " id: " + this.id
+                + ", login: " + this.login
+                + ", name: " + this.name
                 + ", password: " + this.password
-                + ", enabled: "  + this.enabled
+                + ", enabled: " + this.enabled
                 + " ]";
     }
 

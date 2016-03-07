@@ -7,18 +7,37 @@ import java.util.Set;
 
 public class Client extends User {
 
-    private long                id;
-    private String              name;
-    private String              login;
-    private String              password;
-    private boolean             enabled;
+    private long id;
+    private String name;
+    private String login;
+    private String password;
+    private boolean enabled;
 
-    private String              about;
+    private String about;
 
     private Set<Task> tasks;
     private Set<Request> requests;
 
-    public Client(){
+    public Client() {
+    }
+
+    public Client(long id, String name, String login, String password, boolean enabled, String about, Set<Task> tasks, Set<Request> requests) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.password = password;
+        this.enabled = enabled;
+        this.about = about;
+        this.tasks = tasks;
+        this.requests = requests;
+    }
+
+    public Client(long id, String name, String login, String password, boolean enabled) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.password = password;
+        this.enabled = enabled;
     }
 
     @Override
@@ -65,7 +84,7 @@ public class Client extends User {
         return requests;
     }
 
-    public Set <Task> getTasks() {
+    public Set<Task> getTasks() {
         return tasks;
     }
 
@@ -108,11 +127,11 @@ public class Client extends User {
     @Override
     public String toString() {
         return "Client["
-                + " id: "        + this.id
-                + ", login: "    + this.login
-                + ", name: "     + this.name
+                + " id: " + this.id
+                + ", login: " + this.login
+                + ", name: " + this.name
                 + ", password: " + this.password
-                + ", enabled: "  + this.enabled
+                + ", enabled: " + this.enabled
                 + " ]";
     }
 

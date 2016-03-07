@@ -2,14 +2,14 @@ package ua.oracleacademy.fp.domain.users;
 
 import java.io.Serializable;
 
-public abstract class User implements Serializable{
+public abstract class User implements Serializable {
 
-    private long    id;
-    private String  name;
-    private String  login;
-    private String  password;
+    private long id;
+    private String name;
+    private String login;
+    private String password;
     private boolean enabled;
-    private String  about;
+    private String about;
 
     public User() {
     }
