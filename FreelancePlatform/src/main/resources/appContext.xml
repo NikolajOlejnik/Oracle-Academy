@@ -4,10 +4,12 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="ua.oracleacademy.fp.dao.jdbc"/>
-    <context:component-scan base-package="ua.oracleacademy.fp.domain"/>
-    <context:component-scan base-package="ua.oracleacademy.fp.service"/>
+
+    <context:component-scan base-package="main.oracle.academy.fp.dao"/>
+    <context:component-scan base-package="main.oracle.academy.fp.model"/>
+    <context:component-scan base-package="main.oracle.academy.fp.services.impl"/>
 
     <import resource="dbContext.xml"/>
+    <import resource="security.xml"/>
 
 </beans>
