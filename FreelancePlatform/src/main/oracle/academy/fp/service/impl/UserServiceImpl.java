@@ -1,6 +1,6 @@
-package main.oracle.academy.fp.services.impl;
+package main.oracle.academy.fp.service.impl;
 
-import main.oracle.academy.fp.services.UserService;
+import main.oracle.academy.fp.service.UserService;
 import main.oracle.academy.fp.dao.UserDao;
 import main.oracle.academy.fp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getById(Long id) {
-        return null;
+        return userDao.getById(id);
+    }
+
+    @Override
+    @Transactional
+    public User getByLogin(String login) {
+        return userDao.getByLogin(login);
     }
 
     @Override

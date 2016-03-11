@@ -2,6 +2,7 @@ package main.oracle.academy.fp.dao.impl;
 
 import main.oracle.academy.fp.dao.TaskDao;
 import main.oracle.academy.fp.model.Task;
+import main.oracle.academy.fp.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,19 @@ public class TaskDaoImpl implements TaskDao {
     }
 
     @Override
+    public Task getById(Long taskId) {
+        Task task = null;
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            task = (Task) session.get(Task.class, taskId);
+        } catch ( Exception e){
+            e.printStackTrace();
+        }
+        return task;
+    }
+
+    @Override
     public List<Task> getAll() {
         Session session = null;
         List<Task> tasks = new ArrayList<>();
@@ -47,4 +61,5 @@ public class TaskDaoImpl implements TaskDao {
         System.out.println(tasks);
         return tasks;
     }
+
 }

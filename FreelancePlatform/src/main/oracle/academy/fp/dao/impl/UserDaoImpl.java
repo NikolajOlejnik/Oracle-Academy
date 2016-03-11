@@ -3,9 +3,11 @@ package main.oracle.academy.fp.dao.impl;
 import main.oracle.academy.fp.dao.UserDao;
 import main.oracle.academy.fp.model.Role;
 import main.oracle.academy.fp.model.User;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +20,7 @@ public class UserDaoImpl implements UserDao {
 
     @Autowired
     private SessionFactory sessionFactory;
+
 
     @Override
     public User create(User user) {
@@ -36,8 +39,15 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getById(Long id) {
-
-        return null;
+        User user = null;
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            user = (User) session.get(User.class, id);
+        } catch ( Exception e){
+            e.printStackTrace();
+        }
+        return user;
     }
 
     @Override
@@ -77,6 +87,22 @@ public class UserDaoImpl implements UserDao {
         }
         return users;
 
+    }
+
+    @Override
+    public User getByLogin(String login) {
+        User user = null;
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Criteria criteria = session.createCriteria(User.class);
+            criteria.add(Restrictions.eq("login", login));
+            user = (User)criteria.uniqueResult();
+        } catch ( Exception e){
+            e.printStackTrace();
+        }
+
+        return user;
     }
 
 

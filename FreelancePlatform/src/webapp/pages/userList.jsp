@@ -7,16 +7,14 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Title</title>
+    <title>Управление пользователями</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="../resources/css/font-awesome.min.css"/>
-
+    <%--<jsp:include page="staticFiles.jsp"/>--%>
 </head>
 <body>
-
-
-
+<jsp:include page="header.jsp"/>
 <div class="container">
     <div class="row">
 
@@ -83,29 +81,6 @@
         </div>
     </div>
 </div>
-
-<%--<table border="1" width="100%" cellpadding="5">--%>
-<%--<tr>--%>
-<%--<th>id</th>--%>
-<%--<th>login</th>--%>
-<%--<th>name</th>--%>
-<%--<th>actions</th>--%>
-<%--</tr>--%>
-<%--<c:forEach items="${usersList}" var="user">--%>
-<%--<tr>--%>
-<%--<td>${user.id}</td>--%>
-<%--<td>${user.login}</td>--%>
-<%--<td>${user.name}</td>--%>
-<%--<td>--%>
-<%--<form action="/delete/${user.id}" method="GET">--%>
-<%--<button type="submit">delete</button>--%>
-<%--</form><form action="/edit?id=${user.id}" method="GET">--%>
-<%--<button type="submit">edit</button>--%>
-<%--</form>--%>
-<%--</td>--%>
-<%--</tr>--%>
-<%--</c:forEach>--%>
-<%--</table>--%>
 
 </body>
 </html>

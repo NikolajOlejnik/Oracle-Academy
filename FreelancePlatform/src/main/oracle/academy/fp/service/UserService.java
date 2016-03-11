@@ -1,4 +1,4 @@
-package main.oracle.academy.fp.services;
+package main.oracle.academy.fp.service;
 
 import main.oracle.academy.fp.model.User;
 
@@ -8,6 +8,8 @@ public interface UserService {
     User create(User user);
 
     User getById(Long id);
+
+    User getByLogin (String login);
 
     void delete(Long id);
 

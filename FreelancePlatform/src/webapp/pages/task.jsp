@@ -1,13 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-         pageEncoding="utf-8" %>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>Актуальные задания</title>
+  <title>${task.title}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="../resources/css/font-awesome.min.css"/>
@@ -24,33 +21,19 @@
         <div class="panel-heading">
           <div class="row">
             <div class="col col-xs-6">
-              <h3 class="panel-title">Актуальные задания:</h3>
+              <h3 class="panel-title"><b>${task.title}</b>
+              </h3>
             </div>
+            <small class="pull-right">Заказчик: <b> <a href="/user/${taskOwner.id}">${taskOwner.name}</a>  </b> </small>
+            <br>
+            <small class="pull-right">Добавлено: <b> <fmt:formatDate pattern="yyyy-MM-dd H:m"  value="${task.dateAdded}" /></b> </small>
+            <br>
+            <small class="pull-right">Оплата: <b> ${task.price} </b> </small>
           </div>
         </div>
         <div class="panel-body">
-          <table class="table table-striped table-bordered table-list">
-            <thead>
-            <tr>
-              <th>Готовы выполнить?</th>
-              <th>Задача</th>
-              <th>Описание</th>
-              <th>Оплата</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <c:forEach items="${taskList}" var="task">
-              <td align="center">
-                <a class="btn btn-success" href="/task/${task.id}" method="GET"><em class="fa fa-check"></em></a>
-              </td>
-              <td>${task.title}</td>
-              <td>${task.description}</td>
-              <td>${task.price}</td>
-            </tr>
-            </tbody>
-            </c:forEach>
-          </table>
+
+          ${task.description}
 
         </div>
         <div class="panel-footer">

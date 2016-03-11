@@ -1,7 +1,7 @@
-package main.oracle.academy.fp.controllers;
+package main.oracle.academy.fp.web;
 
 import main.oracle.academy.fp.model.User;
-import main.oracle.academy.fp.services.UserService;
+import main.oracle.academy.fp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,16 +16,22 @@ public class UserController {
     private UserService userService ;
 
 
-    @RequestMapping(path = "/", method = RequestMethod.GET)
+    @RequestMapping(path = "/admin", method = RequestMethod.GET)
     public String getUserList(ModelMap model){
         model.put("usersList", userService.getUsersList());
-        return "userList";
+
+        return "userlist";
     }
 
-    @RequestMapping(path = "/login", method = RequestMethod.GET)
-    public String login(ModelMap model){
-        return "login";
+    @RequestMapping(path = "/user/{userId}", method = RequestMethod.GET)
+    public String getUserProfile(ModelMap model, @PathVariable long userId){
+        model.put("user", userService.getById(userId));
+        return "profile";
     }
+//    @RequestMapping(path = "/login", method = RequestMethod.GET)
+//    public String login(ModelMap model){
+//        return "login";
+//    }
 
     @RequestMapping(path = "/add", method = RequestMethod.GET)
     public String processRegistration(@ModelAttribute("userForm") User user,
@@ -33,20 +39,20 @@ public class UserController {
         userService.create(user);
         System.out.println("----------");
         System.out.println(user);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
-    @RequestMapping(path = "/edit/{userId}", method = RequestMethod.GET)
-    public String getUserEditForm(ModelMap model, @PathVariable long userId){
-        System.out.println(userId);
-        return "addUser";
-    }
+//    @RequestMapping(path = "/edit/{userId}", method = RequestMethod.GET)
+//    public String getUserEditForm(ModelMap model, @PathVariable long userId){
+//        System.out.println(userId);
+//        return "addUser";
+//    }
 
     @RequestMapping(path = "/delete/{userId}", method = RequestMethod.GET)
     public String getUserDelete(ModelMap model, @PathVariable long userId){
         userService.delete(userId);
         System.out.println(userId);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
     @RequestMapping(path = "/reg", method = RequestMethod.GET)
