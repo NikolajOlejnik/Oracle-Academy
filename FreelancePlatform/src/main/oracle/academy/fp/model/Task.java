@@ -25,12 +25,21 @@ public class Task {
     @Column(name = "DESCRIPTION")
     private String description;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "DATE_ADDED")
     private Date dateAdded;
 
     @Column(name = "TASK_STATUS")
     private Boolean status;
 
+//    private String smallDescription;
+//
+//    public String getSmallDescription() {
+//        StringBuilder sb = new StringBuilder(this.description);
+//        sb.delete(30, sb.length());
+//        sb.append("...");
+//        return sb.toString();
+//    }
     //private List<Request> requests;
 
     public Task() {

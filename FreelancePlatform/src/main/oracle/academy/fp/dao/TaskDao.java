@@ -9,4 +9,5 @@ public interface TaskDao {
     Task create (Task task);
     Task getById (Long taskId);
     List<Task> getAll();
+    List<Task> getTaskListByDescription(String request);
 }

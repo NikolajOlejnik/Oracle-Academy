@@ -5,6 +5,7 @@ import main.oracle.academy.fp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,5 +31,12 @@ public class UserAuthenticationService implements UserDetailsService {
                         roles);
 
         return userDetails;
+    }
+
+    public User getCurrentUser ()  {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails currentUserDetails = (UserDetails) principal;
+        User currentUser = userService.getByLogin(currentUserDetails.getUsername());
+        return currentUser;
     }
 }

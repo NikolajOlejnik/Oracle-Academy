@@ -3,12 +3,18 @@ package main.oracle.academy.fp.dao.impl;
 import main.oracle.academy.fp.dao.TaskDao;
 import main.oracle.academy.fp.model.Task;
 import main.oracle.academy.fp.model.User;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.LogicalExpression;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,6 +28,7 @@ public class TaskDaoImpl implements TaskDao {
     public Task create(Task task) {
         Session session = null;
         try {
+            task.setDateAdded(new Date());
             session = sessionFactory.openSession();
             task.setStatus(true);
             session.save(task);
@@ -58,8 +65,30 @@ public class TaskDaoImpl implements TaskDao {
         }catch ( Exception e){
             e.printStackTrace();
         }
+        return tasks;
+    }
+
+    @Override
+    public List<Task> getTaskListByDescription(String request) {
+        Session session = null;
+        List<Task> tasks = new ArrayList<>();
+        System.out.println();
+
+        try{
+            session = sessionFactory.openSession();
+            Criteria criteria = session.createCriteria(Task.class);
+            Criterion byTitle = Restrictions.ilike("title", request);
+            Criterion byDescription = Restrictions.ilike("description", request);
+            LogicalExpression orExp = Restrictions.or(byTitle, byDescription);
+            criteria.add(orExp);
+            tasks = criteria.list();
+
+        }catch ( Exception e){
+            e.printStackTrace();
+        }
         System.out.println(tasks);
         return tasks;
+
     }
 
 }

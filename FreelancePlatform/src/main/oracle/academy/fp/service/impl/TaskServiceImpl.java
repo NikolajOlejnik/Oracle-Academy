@@ -45,4 +45,10 @@ public class TaskServiceImpl implements TaskService {
         User user = userDao.getById(task.getUserId());
         return user;
     }
+
+    @Override
+    @Transactional
+    public List<Task> getTaskListByDescription(String request) {
+        return taskDao.getTaskListByDescription(request);
+    }
 }

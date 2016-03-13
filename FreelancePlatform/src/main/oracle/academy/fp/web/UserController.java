@@ -2,6 +2,7 @@ package main.oracle.academy.fp.web;
 
 import main.oracle.academy.fp.model.User;
 import main.oracle.academy.fp.service.UserService;
+import main.oracle.academy.fp.service.impl.UserAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,6 +15,8 @@ public class UserController {
 
     @Autowired
     private UserService userService ;
+    @Autowired
+    private UserAuthenticationService userAuthenticationService ;
 
 
     @RequestMapping(path = "/admin", method = RequestMethod.GET)
@@ -23,23 +26,28 @@ public class UserController {
         return "userlist";
     }
 
+    @RequestMapping (path = "/myaccount", method = RequestMethod.GET)
+    public String getCurrentUserAccount (ModelMap model) {
+        User user = userAuthenticationService.getCurrentUser();
+        model.put("user", user);
+        return "profile";
+    }
+
     @RequestMapping(path = "/user/{userId}", method = RequestMethod.GET)
     public String getUserProfile(ModelMap model, @PathVariable long userId){
         model.put("user", userService.getById(userId));
         return "profile";
     }
-//    @RequestMapping(path = "/login", method = RequestMethod.GET)
-//    public String login(ModelMap model){
-//        return "login";
-//    }
+    @RequestMapping(path = "/login", method = RequestMethod.GET)
+    public String login(ModelMap model){
+        return "login";
+    }
 
-    @RequestMapping(path = "/add", method = RequestMethod.GET)
+    @RequestMapping(path = "/registration", method = RequestMethod.POST)
     public String processRegistration(@ModelAttribute("userForm") User user,
                                       Map<String, Object> model) {
         userService.create(user);
-        System.out.println("----------");
-        System.out.println(user);
-        return "redirect:/admin";
+        return "redirect:/";
     }
 
 //    @RequestMapping(path = "/edit/{userId}", method = RequestMethod.GET)
@@ -51,7 +59,6 @@ public class UserController {
     @RequestMapping(path = "/delete/{userId}", method = RequestMethod.GET)
     public String getUserDelete(ModelMap model, @PathVariable long userId){
         userService.delete(userId);
-        System.out.println(userId);
         return "redirect:/admin";
     }
 

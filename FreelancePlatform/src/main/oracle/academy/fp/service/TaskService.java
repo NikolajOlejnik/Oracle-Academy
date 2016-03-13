@@ -10,4 +10,5 @@ public interface TaskService {
     Task getById (Long taskId);
     List <Task> getTaskList();
     User getTaskOwner (Task task);
+    List <Task> getTaskListByDescription(String request);
 }

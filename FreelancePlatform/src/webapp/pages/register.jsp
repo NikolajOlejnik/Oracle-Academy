@@ -25,7 +25,7 @@
   <!-- Registration form - START -->
   <div class="container">
     <div class="row">
-      <form role="form" action="add" method="get" commandName="userForm">
+      <form role="form" action="registration" method="get" commandName="userForm">
         <div class="col-lg-6">
           <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Обязательные поля</strong></div>
           <div class="form-group">
