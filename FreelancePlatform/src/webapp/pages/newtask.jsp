@@ -10,10 +10,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.min.css" />
   <link rel="stylesheet" type="text/css" href="../resources/css/font-awesome.min.css" />
-  <script type="text/javascript" src="../resources/js/jquery-1.10.2.min.js"></script>
   <script type="text/javascript" src="../resources/js/bootstrap.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script>
+    $(function(){$('p').before('Hello');})
+  </script>
 </head>
 <body>
+
+
 <jsp:include page="header.jsp"/>
 <div class="container-fluid">
   <section class="container">
