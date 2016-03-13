@@ -11,8 +11,8 @@
         <intercept-url pattern="/createtask" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />
         <intercept-url pattern="/login" access="permitAll"/>
         <intercept-url pattern="/**" access="permitAll" />
-        <!--<form-login login-page='/login' default-target-url='/'-->
-                    <!--always-use-default-target='true' />-->
+        <form-login login-page='/login' default-target-url='/'
+                    always-use-default-target='false' />
         <csrf disabled="true"/>
     </http>
 
