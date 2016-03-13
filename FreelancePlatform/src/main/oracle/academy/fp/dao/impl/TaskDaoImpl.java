@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.LogicalExpression;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -59,8 +60,9 @@ public class TaskDaoImpl implements TaskDao {
 
         try{
             session = sessionFactory.openSession();
-            tasks = session.createQuery("FROM Task").list();
-
+            Criteria criteria = session.createCriteria(Task.class);
+            criteria.addOrder(Order.desc("dateAdded"));
+            tasks = criteria.list();
 
         }catch ( Exception e){
             e.printStackTrace();
@@ -72,21 +74,19 @@ public class TaskDaoImpl implements TaskDao {
     public List<Task> getTaskListByDescription(String request) {
         Session session = null;
         List<Task> tasks = new ArrayList<>();
-        System.out.println();
-
         try{
             session = sessionFactory.openSession();
             Criteria criteria = session.createCriteria(Task.class);
-            Criterion byTitle = Restrictions.ilike("title", request);
-            Criterion byDescription = Restrictions.ilike("description", request);
+            Criterion byTitle = Restrictions.like("title", "%" + request + "%");
+            Criterion byDescription = Restrictions.like("description", "%" + request+"%");
             LogicalExpression orExp = Restrictions.or(byTitle, byDescription);
             criteria.add(orExp);
+            criteria.addOrder(Order.desc("dateAdded"));
             tasks = criteria.list();
 
         }catch ( Exception e){
             e.printStackTrace();
         }
-        System.out.println(tasks);
         return tasks;
 
     }

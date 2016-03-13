@@ -47,7 +47,7 @@ public class UserController {
     public String processRegistration(@ModelAttribute("userForm") User user,
                                       Map<String, Object> model) {
         userService.create(user);
-        return "redirect:/";
+        return "register/success";
     }
 
 //    @RequestMapping(path = "/edit/{userId}", method = RequestMethod.GET)

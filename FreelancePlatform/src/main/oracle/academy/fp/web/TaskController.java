@@ -25,8 +25,14 @@ public class TaskController {
     public String getTaskList(ModelMap model){
         model.put("taskList", taskService.getTaskList());
 
-        return "tasklist";
+        return "index";
     }
+
+//    @RequestMapping(path = "/index", method = RequestMethod.GET)
+//    public String index(ModelMap model){
+//        model.put("taskList", taskService.getTaskList());
+//        return "index";
+//    }
 
     @RequestMapping(path = "/search", method = RequestMethod.GET)
     public String getTaskListByDescription (ModelMap model, @ModelAttribute("request") String request){
