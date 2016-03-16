@@ -12,9 +12,6 @@
   <link rel="stylesheet" type="text/css" href="../resources/css/font-awesome.min.css" />
   <script type="text/javascript" src="../resources/js/bootstrap.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script>
-    $(function(){$('p').before('Hello');})
-  </script>
 </head>
 <body>
 

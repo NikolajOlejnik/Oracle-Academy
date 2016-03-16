@@ -41,6 +41,12 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     @Transactional
+    public List<Task> getUserTaskList(Long userId) {
+        return taskDao.getTaskListByUserId(userId);
+    }
+
+    @Override
+    @Transactional
     public User getTaskOwner(Task task) {
         User user = userDao.getById(task.getUserId());
         return user;

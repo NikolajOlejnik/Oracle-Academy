@@ -91,4 +91,25 @@ public class TaskDaoImpl implements TaskDao {
 
     }
 
+    @Override
+    public List<Task> getTaskListByUserId(Long userId) {
+        Session session = null;
+        List<Task> tasks = new ArrayList<>();
+        try{
+            session = sessionFactory.openSession();
+            Criteria criteria = session.createCriteria(Task.class);
+            Criterion byUserID = Restrictions.eq("userId", userId);
+            criteria.add(byUserID);
+            criteria.addOrder(Order.desc("dateAdded"));
+            tasks = criteria.list();
+
+        }catch ( Exception e){
+            e.printStackTrace();
+        }
+        for (Task task: tasks) {
+            System.out.println(task.getStatus());
+        }
+        return tasks;
+    }
+
 }

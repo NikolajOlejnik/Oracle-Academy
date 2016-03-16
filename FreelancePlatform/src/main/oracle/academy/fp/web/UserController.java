@@ -38,6 +38,9 @@ public class UserController {
         model.put("user", userService.getById(userId));
         return "profile";
     }
+
+
+
     @RequestMapping(path = "/login", method = RequestMethod.GET)
     public String login(ModelMap model){
         return "login";

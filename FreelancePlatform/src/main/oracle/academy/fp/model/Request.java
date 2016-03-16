@@ -1,12 +1,11 @@
 package main.oracle.academy.fp.model;
 
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "requests")
 public class Request {
 
     @Id
@@ -19,6 +18,9 @@ public class Request {
 
     @Column(name = "USER_ID")
     private Long userId;
+
+    @Column(name = "USER_NAME")
+    private String userName;
 
     @Column(name = "COMMENT")
     private String comment;
@@ -78,6 +80,14 @@ public class Request {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     @Override

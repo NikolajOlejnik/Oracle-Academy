@@ -10,4 +10,5 @@ public interface TaskDao {
     Task getById (Long taskId);
     List<Task> getAll();
     List<Task> getTaskListByDescription(String request);
+    List<Task> getTaskListByUserId(Long userId);
 }

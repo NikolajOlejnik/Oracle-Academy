@@ -10,9 +10,11 @@
     <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/createtask" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />
         <intercept-url pattern="/login" access="permitAll"/>
+        <intercept-url pattern="/myaccount" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />
         <intercept-url pattern="/**" access="permitAll" />
         <form-login login-page='/login' default-target-url='/'
                     always-use-default-target='false' />
+        <logout logout-success-url="/" />
         <csrf disabled="true"/>
     </http>
 

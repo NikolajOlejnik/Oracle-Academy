@@ -21,6 +21,7 @@
       <h3>${user.name}</h3>
       <h6>О себе:  ${user.about}</h6>
       <h6>Связь: ${user.email}</h6>
+      <h6> <a href="/user/${user.id}/tasklist">Задания</a> </h6>
     </div>
 
     <%--<div class="span2">--%>

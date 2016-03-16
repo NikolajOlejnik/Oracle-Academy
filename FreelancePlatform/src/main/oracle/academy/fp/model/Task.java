@@ -94,7 +94,7 @@ public class Task {
         this.dateAdded = dateAdded;
     }
 
-    public Boolean isActual() {
+    public Boolean getStatus() {
         return status;
     }
 
@@ -102,7 +102,9 @@ public class Task {
         this.status = status;
     }
 
-//    public List<Request> getRequests() {
+
+
+    //    public List<Request> getRequests() {
 //        return requests;
 //    }
 //

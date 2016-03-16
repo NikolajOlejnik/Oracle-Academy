@@ -3,8 +3,10 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" >
+    <link rel="stylesheet" type="text/css" href="../resources/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
 <sec:authentication var="principal" property="principal" />
@@ -16,12 +18,16 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="/createtask"> <i class="fa fa-plus"></i> Добавить задание</a></li>
+        <li><a href="/createtask">Добавить задание <i class="fa fa-plus"></i></a></li>
 
-<sec:authorize access="isAuthenticated()"> <li><a href="/myaccount">Привет, <i class="fa fa-user"></i> ${principal.username}!</a> </li> </sec:authorize>
+<sec:authorize access="isAuthenticated()">
+    <li><a href="/myaccount">Привет, <i class="fa fa-user"></i> ${principal.username}!</a> </li>
+    <li><a href="/logout">Выйти <i class="fa fa-sign-out"></i></a> </li>
+</sec:authorize>
 
         <sec:authorize access="!isAuthenticated()"> <li> <a href="/login">
-          <i class="fa fa-user-plus"></i> Регистрация</a> </li> </sec:authorize>
+           Вход <i class="fa fa-sign-in"></i>
+            / Регистрация <i class="fa fa-user-plus"></i></a> </li> </sec:authorize>
 
         <%--<li><a href="/myaccount"><sec:authorize access="isAuthenticated()">--%>
           <%--<p>Привет,  <sec:authentication property="principal.username" /> !</p>--%>
