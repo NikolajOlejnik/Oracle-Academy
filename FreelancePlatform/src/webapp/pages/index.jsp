@@ -50,6 +50,7 @@
                 }
             });
         });
+
     </script>
 
 </head>
@@ -97,13 +98,13 @@
                             <td>${task.title}</td>
                             <td>${task.price}</td>
                             <td>
-                                <button type="button" class="btn btn-default center-block" data-toggle="collapse"
-                                        data-target="#${task.id}">
+                                <button type="button" class="btn btn-default center-block"  data-toggle="collapse" data-target="#${task.id}">
                                     Посмотреть <i class="fa fa-caret-square-o-down"></i>
                                 </button>
-                                <div id="${task.id}" class="collapse">
+                                <div id="${task.id}" >
                                         ${task.description}
                                 </div>
+
                             </td>
                             <td><a href="/task/${task.id}" method="GET" class="btn btn-default center-block">Перейти на
                                 страницу задания <i class="fa fa-caret-square-o-right"></i>

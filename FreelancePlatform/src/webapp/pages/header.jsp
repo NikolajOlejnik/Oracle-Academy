@@ -16,7 +16,6 @@
       <a class="navbar-brand" href="/"><i class="fa fa-home"></i>
       </a>
     </div>
-    <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li><a href="/createtask">Добавить задание <i class="fa fa-plus"></i></a></li>
 
@@ -33,7 +32,6 @@
           <%--<p>Привет,  <sec:authentication property="principal.username" /> !</p>--%>
         <%--</sec:authorize> </a></li>--%>
       </ul>
-    </div>
   </div>
 </div>
 <br><br><br>
