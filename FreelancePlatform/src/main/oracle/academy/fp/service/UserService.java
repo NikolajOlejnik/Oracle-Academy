@@ -1,5 +1,6 @@
 package main.oracle.academy.fp.service;
 
+import main.oracle.academy.fp.exceptions.UserException;
 import main.oracle.academy.fp.model.User;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface UserService {
 
     User getByLogin (String login);
 
-    void delete(Long id);
+    void delete(Long id) throws UserException;
 
     User update(User user);
 

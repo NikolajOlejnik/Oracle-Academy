@@ -1,5 +1,6 @@
 package main.oracle.academy.fp.web;
 
+import main.oracle.academy.fp.exceptions.UserException;
 import main.oracle.academy.fp.model.User;
 import main.oracle.academy.fp.service.UserService;
 import main.oracle.academy.fp.service.impl.UserAuthenticationService;
@@ -61,8 +62,14 @@ public class UserController {
 
     @RequestMapping(path = "/delete/{userId}", method = RequestMethod.GET)
     public String getUserDelete(ModelMap model, @PathVariable long userId){
-        userService.delete(userId);
-        return "redirect:/admin";
+        try {
+            userService.delete(userId);
+            return "redirect:/admin";
+        } catch (UserException e) {
+            e.printStackTrace();
+            return "usernotfound";
+        }
+
     }
 
     @RequestMapping(path = "/reg", method = RequestMethod.GET)

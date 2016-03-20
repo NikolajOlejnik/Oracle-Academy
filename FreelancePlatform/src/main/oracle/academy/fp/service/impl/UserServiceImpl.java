@@ -1,5 +1,6 @@
 package main.oracle.academy.fp.service.impl;
 
+import main.oracle.academy.fp.exceptions.UserException;
 import main.oracle.academy.fp.service.UserService;
 import main.oracle.academy.fp.dao.UserDao;
 import main.oracle.academy.fp.model.User;
@@ -37,8 +38,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void delete(Long id) {
-        userDao.delete(id);
+    public void delete(Long id) throws UserException {
+        if (userDao.getById(id) != null){
+            userDao.delete(id);} else {
+            throw new UserException();
+        }
+
     }
 
     @Override

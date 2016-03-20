@@ -5,11 +5,11 @@
 <head>
     <title></title>
 
-    <style type="text/css">
-        body {
-            margin-top: 2%
-        }
-    </style>
+    <%--<style type="text/css">--%>
+    <%--body {--%>
+    <%--margin-top: 2%--%>
+    <%--}--%>
+    <%--</style>--%>
 
     <link rel="stylesheet" type="text/css" href="../resources/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -50,14 +50,16 @@
                 }
             });
         });
-
     </script>
 
 </head>
 
 <body>
 <jsp:include page="header.jsp"/>
+
 <div class="container">
+
+
     <div class="row">
 
         <div class="col-md-10 col-md-offset-1">
@@ -81,13 +83,12 @@
                 </div>
                 <div class="panel-body">
 
-                    <table class="table table-list-search table-striped">
+                    <table class="table table-list-search table-striped table-bordered">
                         <thead>
                         <tr>
                             <th>Добавлено</th>
                             <th>Задание</th>
                             <th>Оплата</th>
-                            <th>Подробности</th>
                             <th>Готовы выполнить?</th>
                         </tr>
                         </thead>
@@ -97,15 +98,6 @@
                             <td width="150"><fmt:formatDate pattern="yyyy-MM-dd H:m" value="${task.dateAdded}"/></td>
                             <td>${task.title}</td>
                             <td>${task.price}</td>
-                            <td>
-                                <button type="button" class="btn btn-default center-block"  data-toggle="collapse" data-target="#${task.id}">
-                                    Посмотреть <i class="fa fa-caret-square-o-down"></i>
-                                </button>
-                                <div id="${task.id}" >
-                                        ${task.description}
-                                </div>
-
-                            </td>
                             <td><a href="/task/${task.id}" method="GET" class="btn btn-default center-block">Перейти на
                                 страницу задания <i class="fa fa-caret-square-o-right"></i>
                             </a>
@@ -121,5 +113,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>
