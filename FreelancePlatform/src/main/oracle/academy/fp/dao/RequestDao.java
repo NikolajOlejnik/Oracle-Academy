@@ -8,4 +8,8 @@ public interface RequestDao {
     Request create (Request request);
 
     List<Request> getAllRequestByTaskId(Long taskId);
+
+    Request getRequestById(Long requestId);
+
+    Boolean update(Request request);
 }

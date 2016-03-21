@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <html>
 <head>
     <title>${task.title}</title>
@@ -203,10 +205,11 @@
                 ${task.description}
             </div>
             <div class="post-footer">
+                <b> Претенденты: </b>
                     <ul class="comments-list">
                         <tr>
                             <c:forEach items="${requestList}" var="request">
-                                <li class="comment">
+                                <li class="comment panel-shadow panel-white">
 
                                     <a class="pull-left" href="/user/${request.userId}">
                                         <img class="avatar" src="http://bootdey.com/img/Content/user_1.jpg"
@@ -214,6 +217,7 @@
                                     </a>
 
                                     <div class="comment-body">
+                                        <a class="btn btn-success pull-right" href="/task/acceptrequest/${task.id}/${request.id}">Принять запрос <em class="fa fa-check-square-o"></em></a>
                                         <div class="comment-heading">
                                             <div class="title h4"><a
                                                     href="/user/${request.userId}"> ${request.userName} </a></div>
@@ -221,7 +225,7 @@
                                                                              value="${request.dateAdded}"/></h5>
 
                                         </div>
-                                        <p>${request.comment} <a class="btn btn-success" ><em class="fa fa-pencil"></em></a>
+                                        <p>${request.comment}
                                         </p>
                                     </div>
                                 </li>

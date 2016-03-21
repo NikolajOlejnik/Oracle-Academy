@@ -24,9 +24,6 @@ public class RequestDaoImpl implements RequestDao {
     public Request create(Request request) {
         Session session = null;
         try {
-            System.out.println("--------");
-            System.out.println(request);
-            System.out.println("--------");
             request.setDateAdded(new Date());
             request.setStatus(false);
             session = sessionFactory.openSession();
@@ -45,7 +42,6 @@ public class RequestDaoImpl implements RequestDao {
 
         try{
             session = sessionFactory.openSession();
-
             Criteria criteria = session.createCriteria(Request.class);
             criteria.add(Restrictions.eq("taskId", taskId));
             criteria.addOrder(Order.desc("dateAdded"));
@@ -55,4 +51,33 @@ public class RequestDaoImpl implements RequestDao {
         }
         return requests;
     }
+
+    @Override
+    public Request getRequestById(Long requestId) {
+        Request request = null;
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            request = (Request) session.get(Request.class, requestId);
+        } catch ( Exception e){
+            e.printStackTrace();
+        }
+        return request;
+    }
+
+    @Override
+    public Boolean update(Request request) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            session.update(request);
+            session.flush();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 }

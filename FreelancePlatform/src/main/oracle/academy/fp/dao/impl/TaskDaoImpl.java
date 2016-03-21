@@ -106,10 +106,21 @@ public class TaskDaoImpl implements TaskDao {
         }catch ( Exception e){
             e.printStackTrace();
         }
-        for (Task task: tasks) {
-            System.out.println(task.getStatus());
-        }
+
         return tasks;
     }
 
+    @Override
+    public Boolean update(Task task) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            session.update(task);
+            session.flush();
+            return true;
+        } catch ( Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

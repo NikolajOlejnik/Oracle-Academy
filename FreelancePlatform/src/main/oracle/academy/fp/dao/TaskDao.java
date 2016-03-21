@@ -11,4 +11,5 @@ public interface TaskDao {
     List<Task> getAll();
     List<Task> getTaskListByDescription(String request);
     List<Task> getTaskListByUserId(Long userId);
+    Boolean update(Task task);
 }

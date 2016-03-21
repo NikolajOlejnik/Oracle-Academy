@@ -29,4 +29,11 @@ public class RequestServiceImpl implements RequestService {
 
         return requestDao.getAllRequestByTaskId (taskId);
     }
+
+    @Override
+    @Transactional
+    public Request getRequestById(Long requestId) {
+        return requestDao.getRequestById(requestId);
+    }
+
 }
