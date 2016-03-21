@@ -54,13 +54,15 @@ public class TaskDaoImpl implements TaskDao {
     }
 
     @Override
-    public List<Task> getAll() {
+    public List<Task> getAllActual() {
         Session session = null;
         List<Task> tasks = new ArrayList<>();
 
         try{
             session = sessionFactory.openSession();
             Criteria criteria = session.createCriteria(Task.class);
+            Criterion actual = Restrictions.eq("status", true);
+            criteria.add(actual);
             criteria.addOrder(Order.desc("dateAdded"));
             tasks = criteria.list();
 

@@ -23,7 +23,6 @@ public class UserController {
     @RequestMapping(path = "/admin", method = RequestMethod.GET)
     public String getUserList(ModelMap model) {
         model.put("usersList", userService.getUsersList());
-
         return "userlist";
     }
 
@@ -52,12 +51,6 @@ public class UserController {
         return "register/success";
     }
 
-//    @RequestMapping(path = "/edit/{userId}", method = RequestMethod.GET)
-//    public String getUserEditForm(ModelMap model, @PathVariable long userId){
-//        System.out.println(userId);
-//        return "addUser";
-//    }
-
     @RequestMapping(path = "/delete/{userId}", method = RequestMethod.GET)
     public String getUserDelete(ModelMap model, @PathVariable long userId) {
         try {
@@ -65,14 +58,13 @@ public class UserController {
             return "redirect:/admin";
         } catch (UserException e) {
             e.printStackTrace();
-            return "usernotfound";
+            return "redirect:/404";
         }
 
     }
 
     @RequestMapping(path = "/reg", method = RequestMethod.GET)
     public String regNewUser(ModelMap model) {
-
         return "register";
     }
 }

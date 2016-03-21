@@ -44,7 +44,7 @@ public class RequestController {
             taskService.acceptRequest(taskId, requestId);
         } catch (TaskException | RequestException e) {
             e.printStackTrace();
-            return "error-404";
+            return "/404";
         }
         return "redirect:/user/" + request.getUserId();
     }

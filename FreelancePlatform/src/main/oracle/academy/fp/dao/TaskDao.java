@@ -8,7 +8,7 @@ import java.util.List;
 public interface TaskDao {
     Task create (Task task);
     Task getById (Long taskId);
-    List<Task> getAll();
+    List<Task> getAllActual();
     List<Task> getTaskListByDescription(String request);
     List<Task> getTaskListByUserId(Long userId);
     Boolean update(Task task);

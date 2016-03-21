@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -25,11 +24,15 @@ public class TaskServiceImpl implements TaskService {
     private UserDao userDao;
     @Autowired
     private RequestDao requestDao;
+    @Autowired
+    private UserAuthenticationService userAuthenticationService;
 
 
     @Override
     @Transactional
     public Task create(Task task) {
+        User user = userAuthenticationService.getCurrentUser();
+        task.setUserId(user.getId());
         taskDao.create(task);
         return task;
     }
@@ -52,8 +55,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     @Transactional
-    public List<Task> getTaskList() {
-        return taskDao.getAll();
+    public List<Task> getActualTaskList() {
+        return taskDao.getAllActual();
     }
 
     @Override
@@ -92,5 +95,11 @@ public class TaskServiceImpl implements TaskService {
             }
         } else
             throw new TaskException();
+    }
+
+    @Override
+    @Transactional
+    public List<Task> getCurrentUserTaskList() {
+        return taskDao.getTaskListByUserId(userAuthenticationService.getCurrentUser().getId());
     }
 }

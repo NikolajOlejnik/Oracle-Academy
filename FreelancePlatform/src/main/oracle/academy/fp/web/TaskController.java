@@ -1,7 +1,6 @@
 package main.oracle.academy.fp.web;
 
 import main.oracle.academy.fp.model.Task;
-import main.oracle.academy.fp.model.User;
 import main.oracle.academy.fp.service.RequestService;
 import main.oracle.academy.fp.service.TaskService;
 import main.oracle.academy.fp.service.UserService;
@@ -29,8 +28,7 @@ public class TaskController {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String getTaskList(ModelMap model) {
-        model.put("taskList", taskService.getTaskList());
-
+        model.put("taskList", taskService.getActualTaskList());
         return "index";
     }
 
@@ -44,25 +42,11 @@ public class TaskController {
 
     @RequestMapping(path = "/mytasks", method = RequestMethod.GET)
     public String getMyTaskList(ModelMap model) {
-        User user = userAuthenticationService.getCurrentUser();
-        model.put("taskList", taskService.getUserTaskList(user.getId()));
-        model.put("user", user);
+        model.put("taskList", taskService.getCurrentUserTaskList());
+        model.put("user", userAuthenticationService.getCurrentUser());
         return "usertasklist";
     }
 
-
-//    @RequestMapping(path = "/index", method = RequestMethod.GET)
-//    public String index(ModelMap model){
-//        model.put("taskList", taskService.getTaskList());
-//        return "index";
-//    }
-
-//    @RequestMapping(path = "/search", method = RequestMethod.GET)
-//    public String getTaskListByDescription (ModelMap model, @ModelAttribute("request") String request){
-//        model.put("taskList", taskService.getTaskListByDescription(request));
-//
-//        return "searchresult";
-//    }
 
     @RequestMapping(path = "/task/{taskId}", method = RequestMethod.GET)
     public String getTask(ModelMap model, @PathVariable long taskId) {
@@ -75,16 +59,12 @@ public class TaskController {
 
     @RequestMapping(path = "createtask", method = RequestMethod.GET)
     public String createTask() {
-
         return "newtask";
     }
 
     @RequestMapping(path = "/addtask", method = RequestMethod.POST)
     public String addNewTask(@ModelAttribute("task") Task task,
                              Map<String, Object> model) {
-
-        User user = userAuthenticationService.getCurrentUser();
-        task.setUserId(user.getId());
         taskService.create(task);
         return "redirect:/";
     }
