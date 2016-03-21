@@ -8,14 +8,12 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <title>Новое задание</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.min.css" />
-  <link rel="stylesheet" type="text/css" href="../resources/css/font-awesome.min.css" />
-  <script type="text/javascript" src="../resources/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 <body>
-
-
 <jsp:include page="header.jsp"/>
 <div class="container-fluid">
   <section class="container">
