@@ -2,6 +2,7 @@ package main.oracle.academy.fp.service.impl;
 
 import main.oracle.academy.fp.dao.RequestDao;
 import main.oracle.academy.fp.model.Request;
+import main.oracle.academy.fp.model.User;
 import main.oracle.academy.fp.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,17 +15,21 @@ public class RequestServiceImpl implements RequestService {
 
     @Autowired
     private RequestDao requestDao;
+    @Autowired
+    private UserAuthenticationService userAuthenticationService;
 
     @Override
     @Transactional
-    public Request addRequest(Request request) {
+    public Request sendRequest(Request request) {
+        User user = userAuthenticationService.getCurrentUser();
+        request.setUserId(user.getId());
+        request.setUserName(user.getName());
         requestDao.create(request);
         return request;
     }
 
-
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Request> getAllRequestByTaskId(Long taskId) {
 
         return requestDao.getAllRequestByTaskId (taskId);
@@ -40,6 +45,12 @@ public class RequestServiceImpl implements RequestService {
     @Transactional
     public List<Request> getAllUserRequests(Long id) {
         return requestDao.getAllUserRequests(id);
+    }
+
+    @Override
+    @Transactional
+    public List<Request> getAllRequestsCurrentUser() {
+        return requestDao.getAllUserRequests(userAuthenticationService.getCurrentUser().getId());
     }
 
 }

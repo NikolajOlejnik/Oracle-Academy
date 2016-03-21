@@ -15,35 +15,33 @@ import java.util.Map;
 public class UserController {
 
     @Autowired
-    private UserService userService ;
+    private UserService userService;
     @Autowired
-    private UserAuthenticationService userAuthenticationService ;
+    private UserAuthenticationService userAuthenticationService;
 
 
     @RequestMapping(path = "/admin", method = RequestMethod.GET)
-    public String getUserList(ModelMap model){
+    public String getUserList(ModelMap model) {
         model.put("usersList", userService.getUsersList());
 
         return "userlist";
     }
 
-    @RequestMapping (path = "/myaccount", method = RequestMethod.GET)
-    public String getCurrentUserAccount (ModelMap model) {
+    @RequestMapping(path = "/myaccount", method = RequestMethod.GET)
+    public String getCurrentUserAccount(ModelMap model) {
         User user = userAuthenticationService.getCurrentUser();
         model.put("user", user);
         return "profile";
     }
 
     @RequestMapping(path = "/user/{userId}", method = RequestMethod.GET)
-    public String getUserProfile(ModelMap model, @PathVariable long userId){
+    public String getUserProfile(ModelMap model, @PathVariable long userId) {
         model.put("user", userService.getById(userId));
         return "profile";
     }
 
-
-
     @RequestMapping(path = "/login", method = RequestMethod.GET)
-    public String login(ModelMap model){
+    public String login(ModelMap model) {
         return "login";
     }
 
@@ -61,7 +59,7 @@ public class UserController {
 //    }
 
     @RequestMapping(path = "/delete/{userId}", method = RequestMethod.GET)
-    public String getUserDelete(ModelMap model, @PathVariable long userId){
+    public String getUserDelete(ModelMap model, @PathVariable long userId) {
         try {
             userService.delete(userId);
             return "redirect:/admin";
@@ -73,7 +71,7 @@ public class UserController {
     }
 
     @RequestMapping(path = "/reg", method = RequestMethod.GET)
-    public String regNewUser(ModelMap model){
+    public String regNewUser(ModelMap model) {
 
         return "register";
     }

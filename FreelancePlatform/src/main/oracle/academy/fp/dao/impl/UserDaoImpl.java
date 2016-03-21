@@ -25,14 +25,12 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User create(User user) {
         Session session = null;
-        try {
+
             session = sessionFactory.openSession();
             user.setRole(Role.ROLE_USER);
             user.setEnabled(true);
             session.save(user);
-        } catch ( Exception e){
-            e.printStackTrace();
-        }
+
 
         return user;
     }

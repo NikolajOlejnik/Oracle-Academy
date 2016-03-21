@@ -23,19 +23,19 @@ public class TaskController {
     @Autowired
     private RequestService requestService;
     @Autowired
-    private UserAuthenticationService userAuthenticationService ;
+    private UserAuthenticationService userAuthenticationService;
     @Autowired
-    private UserService userService ;
+    private UserService userService;
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public String getTaskList(ModelMap model){
+    public String getTaskList(ModelMap model) {
         model.put("taskList", taskService.getTaskList());
 
         return "index";
     }
 
     @RequestMapping(path = "/user/{userId}/tasklist", method = RequestMethod.GET)
-    public String getUserTaskList(ModelMap model, @PathVariable long userId){
+    public String getUserTaskList(ModelMap model, @PathVariable long userId) {
         model.put("taskList", taskService.getUserTaskList(userId));
         model.put("user", userService.getById(userId));
         return "usertasklist";
@@ -43,7 +43,7 @@ public class TaskController {
 
 
     @RequestMapping(path = "/mytasks", method = RequestMethod.GET)
-    public String getMyTaskList(ModelMap model){
+    public String getMyTaskList(ModelMap model) {
         User user = userAuthenticationService.getCurrentUser();
         model.put("taskList", taskService.getUserTaskList(user.getId()));
         model.put("user", user);
@@ -65,7 +65,7 @@ public class TaskController {
 //    }
 
     @RequestMapping(path = "/task/{taskId}", method = RequestMethod.GET)
-    public String getTask(ModelMap model,@PathVariable long taskId){
+    public String getTask(ModelMap model, @PathVariable long taskId) {
         Task task = taskService.getById(taskId);
         model.put("task", task);
         model.put("taskOwner", taskService.getTaskOwner(task));
@@ -74,14 +74,14 @@ public class TaskController {
     }
 
     @RequestMapping(path = "createtask", method = RequestMethod.GET)
-    public String createTask(){
+    public String createTask() {
 
         return "newtask";
     }
 
     @RequestMapping(path = "/addtask", method = RequestMethod.POST)
     public String addNewTask(@ModelAttribute("task") Task task,
-                                      Map<String, Object> model) {
+                             Map<String, Object> model) {
 
         User user = userAuthenticationService.getCurrentUser();
         task.setUserId(user.getId());
