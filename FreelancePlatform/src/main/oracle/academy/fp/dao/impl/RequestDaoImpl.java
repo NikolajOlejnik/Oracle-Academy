@@ -22,46 +22,26 @@ public class RequestDaoImpl implements RequestDao {
 
     @Override
     public Request create(Request request) {
-        Session session = null;
-        try {
-            request.setDateAdded(new Date());
-            request.setStatus(false);
-            session = sessionFactory.openSession();
-            session.save(request);
-        } catch ( Exception e){
-            e.printStackTrace();
-        }
-
+        Session session = sessionFactory.openSession();
+        session.save(request);
         return request;
     }
 
     @Override
     public List<Request> getAllRequestByTaskId(Long taskId) {
-        Session session = null;
-        List<Request> requests = new ArrayList<>();
-
-        try{
-            session = sessionFactory.openSession();
-            Criteria criteria = session.createCriteria(Request.class);
-            criteria.add(Restrictions.eq("taskId", taskId));
-            criteria.addOrder(Order.desc("dateAdded"));
-            requests = criteria.list();
-        }catch ( Exception e){
-            e.printStackTrace();
-        }
+        List<Request> requests;
+        Session session = sessionFactory.openSession();
+        Criteria criteria = session.createCriteria(Request.class);
+        criteria.add(Restrictions.eq("taskId", taskId));
+        criteria.addOrder(Order.desc("dateAdded"));
+        requests = criteria.list();
         return requests;
     }
 
     @Override
     public Request getRequestById(Long requestId) {
-        Request request = null;
-        Session session = null;
-        try {
-            session = sessionFactory.openSession();
-            request = (Request) session.get(Request.class, requestId);
-        } catch ( Exception e){
-            e.printStackTrace();
-        }
+        Session session = sessionFactory.openSession();
+        Request request = (Request) session.get(Request.class, requestId);
         return request;
     }
 
@@ -83,13 +63,13 @@ public class RequestDaoImpl implements RequestDao {
     public List<Request> getAllUserRequests(Long id) {
         Session session = null;
         List<Request> requests = new ArrayList<>();
-        try{
+        try {
             session = sessionFactory.openSession();
             Criteria criteria = session.createCriteria(Request.class);
             criteria.add(Restrictions.eq("userId", id));
             criteria.addOrder(Order.desc("dateAdded"));
             requests = criteria.list();
-        }catch ( Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         System.out.println(requests);

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,6 +25,8 @@ public class RequestServiceImpl implements RequestService {
         User user = userAuthenticationService.getCurrentUser();
         request.setUserId(user.getId());
         request.setUserName(user.getName());
+        request.setDateAdded(new Date());
+        request.setStatus(false);
         requestDao.create(request);
         return request;
     }
