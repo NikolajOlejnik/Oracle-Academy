@@ -2,11 +2,12 @@ package main.oracle.academy.fp.model;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "requests")
-public class Request {
+public class Request implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,6 +26,7 @@ public class Request {
     @Column(name = "COMMENT")
     private String comment;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "DATE_ADDED")
     private Date dateAdded;
 
