@@ -8,4 +8,5 @@ public interface RequestService {
     Request addRequest(Request request);
     List<Request> getAllRequestByTaskId(Long taskId);
     Request getRequestById(Long requestId);
+    List <Request> getAllUserRequests(Long id);
 }

@@ -182,13 +182,14 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+<sec:authentication var="principal" property="principal" />
+<%--<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">--%>
 <div class="container">
     <div class="col-sm-8">
         <div class="panel panel-white post panel-shadow">
             <div class="post-heading">
                 <div class="pull-left image">
-                    <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar"
+                    <img src="../resources/images/father.jpeg" class="img-circle avatar"
                          alt="user profile image">
                 </div>
                 <div class="pull-left meta">
@@ -205,6 +206,9 @@
                 ${task.description}
             </div>
             <div class="post-footer">
+                <sec:authorize access="!isAuthenticated()"> Если хотите оставить заявку - <a href="/login">
+                    войдите <i class="fa fa-sign-in"></i>
+                    или зарегистрируйтесь <i class="fa fa-user-plus"></i></a> <br> <br>  </sec:authorize>
                 <b> Претенденты: </b>
                     <ul class="comments-list">
                         <tr>
@@ -212,12 +216,17 @@
                                 <li class="comment panel-shadow panel-white">
 
                                     <a class="pull-left" href="/user/${request.userId}">
-                                        <img class="avatar" src="http://bootdey.com/img/Content/user_1.jpg"
+                                        <img class="avatar" src="../resources/images/anonymous.png"
                                              alt="avatar">
                                     </a>
 
                                     <div class="comment-body">
+                                        <sec:authorize access="isAuthenticated()">
+                                        <c:if test="${taskOwner.login == principal.username && task.status}">
                                         <a class="btn btn-success pull-right" href="/task/acceptrequest/${task.id}/${request.id}">Принять запрос <em class="fa fa-check-square-o"></em></a>
+                                        </c:if>
+                                        </sec:authorize>
+
                                         <div class="comment-heading">
                                             <div class="title h4"><a
                                                     href="/user/${request.userId}"> ${request.userName} </a></div>
@@ -233,8 +242,8 @@
                         </tr>
                     </ul>
                 <sec:authorize access="isAuthenticated()">
-                    <sec:authentication var="principal" property="principal" />
-                    <c:if test="${taskOwner.login != principal.username}">
+                    <%--<sec:authentication var="principal" property="principal" />--%>
+                    <c:if test="${taskOwner.login != principal.username && task.status}">
                     <button type="button" class="btn btn-primary">Оставить заявку <i class="fa fa-caret-square-o-down"></i>
                     </button>
                     <div class="collapse">

@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title></title>
+    <title>Freelance platform</title>
 
     <%--<style type="text/css">--%>
     <%--body {--%>

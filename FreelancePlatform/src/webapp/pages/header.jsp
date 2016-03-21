@@ -17,9 +17,16 @@
       </a>
     </div>
       <ul class="nav navbar-nav">
-        <li><a href="/createtask">Добавить задание <i class="fa fa-plus"></i></a></li>
 
-<sec:authorize access="isAuthenticated()">
+          <li><a href="/mytasks">Мои задания <i class="fa fa-file-text-o"></i></a></li>
+
+
+          <li><a href="/createtask">Добавить задание <i class="fa fa-plus"></i></a></li>
+
+          <li><a href="/myrequests">Проверить статус заявок <i class="fa fa-calendar-check-o"></i></a></li>
+
+
+          <sec:authorize access="isAuthenticated()">
     <li><a href="/myaccount">Привет, <i class="fa fa-user"></i> ${principal.username}!</a> </li>
     <li><a href="/logout">Выйти <i class="fa fa-sign-out"></i></a> </li>
 </sec:authorize>

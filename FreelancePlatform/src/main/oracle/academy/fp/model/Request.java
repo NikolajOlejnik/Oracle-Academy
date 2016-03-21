@@ -74,7 +74,7 @@ public class Request {
         this.dateAdded = dateAdded;
     }
 
-    public boolean isActual() {
+    public boolean isStatus() {
         return status;
     }
 

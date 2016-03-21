@@ -12,4 +12,6 @@ public interface RequestDao {
     Request getRequestById(Long requestId);
 
     Boolean update(Request request);
+
+    List<Request> getAllUserRequests(Long id);
 }

@@ -41,6 +41,16 @@ public class TaskController {
         return "usertasklist";
     }
 
+
+    @RequestMapping(path = "/mytasks", method = RequestMethod.GET)
+    public String getMyTaskList(ModelMap model){
+        User user = userAuthenticationService.getCurrentUser();
+        model.put("taskList", taskService.getUserTaskList(user.getId()));
+        model.put("user", user);
+        return "usertasklist";
+    }
+
+
 //    @RequestMapping(path = "/index", method = RequestMethod.GET)
 //    public String index(ModelMap model){
 //        model.put("taskList", taskService.getTaskList());

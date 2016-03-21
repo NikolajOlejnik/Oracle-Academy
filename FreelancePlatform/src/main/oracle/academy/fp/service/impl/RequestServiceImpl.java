@@ -36,4 +36,10 @@ public class RequestServiceImpl implements RequestService {
         return requestDao.getRequestById(requestId);
     }
 
+    @Override
+    @Transactional
+    public List<Request> getAllUserRequests(Long id) {
+        return requestDao.getAllUserRequests(id);
+    }
+
 }

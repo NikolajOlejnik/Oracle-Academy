@@ -33,6 +33,14 @@ public class RequestController {
         return "redirect:/task/"+request.getTaskId();
     }
 
+    @RequestMapping(path = "/myrequests", method = RequestMethod.GET)
+    public String getMyRequestsList(ModelMap model){
+        User user = userAuthenticationService.getCurrentUser();
+        model.put("requestlist", requestService.getAllUserRequests(user.getId()));
+        model.put("user", user);
+        return "requestlist";
+    }
+
     @RequestMapping(value = "/task/acceptrequest/{taskId}/{requestId}", method = RequestMethod.GET)
     public String acceptRequest (@PathVariable long taskId, @PathVariable long requestId) {
         Request request = requestService.getRequestById (requestId);

@@ -79,5 +79,22 @@ public class RequestDaoImpl implements RequestDao {
         }
     }
 
+    @Override
+    public List<Request> getAllUserRequests(Long id) {
+        Session session = null;
+        List<Request> requests = new ArrayList<>();
+        try{
+            session = sessionFactory.openSession();
+            Criteria criteria = session.createCriteria(Request.class);
+            criteria.add(Restrictions.eq("userId", id));
+            criteria.addOrder(Order.desc("dateAdded"));
+            requests = criteria.list();
+        }catch ( Exception e){
+            e.printStackTrace();
+        }
+        System.out.println(requests);
+        return requests;
+    }
+
 
 }
