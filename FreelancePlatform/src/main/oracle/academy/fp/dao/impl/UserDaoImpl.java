@@ -17,53 +17,27 @@ import java.util.List;
 @Repository
 public class UserDaoImpl implements UserDao {
 
-
     @Autowired
     private SessionFactory sessionFactory;
 
-
     @Override
     public User create(User user) {
-        Session session = null;
-
-            session = sessionFactory.openSession();
-            user.setRole(Role.ROLE_USER);
-            user.setEnabled(true);
-            session.save(user);
-
-
+        sessionFactory.getCurrentSession().save(user);
         return user;
     }
 
     @Override
     public User getById(Long id) {
-        User user = null;
-        Session session = null;
-        try {
-            session = sessionFactory.openSession();
-            user = (User) session.get(User.class, id);
-        } catch ( Exception e){
-            e.printStackTrace();
-        }
-        return user;
+        return  (User) sessionFactory.getCurrentSession().get(User.class, id);
     }
 
     @Override
-    public boolean delete(Long id) {
-        Session session = null;
-        try {
-            session = sessionFactory.openSession();
-            Query q = session.createQuery("delete User where id = " + id);
-            q.executeUpdate();
-        } catch ( Exception e){
-            e.printStackTrace();
-            return false;
-        }
-
-
-        return true;
+    public boolean delete(User user) {
+            sessionFactory.getCurrentSession().delete(user);
+            return true;
     }
 
+    //ДОПИСАТЬ!!
     @Override
     public User update(User user) {
         return null;
@@ -71,36 +45,14 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAll() {
-
-        Session session = null;
-        List<User> users = new LinkedList<>();
-
-        try{
-            session = sessionFactory.openSession();
-            users = session.createQuery("FROM User").list();
-
-
-        }catch ( Exception e){
-            e.printStackTrace();
-        }
-        return users;
-
+        return sessionFactory.getCurrentSession().createCriteria(User.class).list();
     }
 
     @Override
     public User getByLogin(String login) {
-        User user = null;
-        Session session = null;
-        try {
-            session = sessionFactory.openSession();
-            Criteria criteria = session.createCriteria(User.class);
-            criteria.add(Restrictions.eq("login", login));
-            user = (User)criteria.uniqueResult();
-        } catch ( Exception e){
-            e.printStackTrace();
-        }
-
-        return user;
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
+        criteria.add(Restrictions.eq("login", login));
+        return (User)criteria.uniqueResult();
     }
 
 

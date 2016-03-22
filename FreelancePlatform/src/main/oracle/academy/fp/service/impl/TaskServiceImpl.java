@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -33,6 +34,8 @@ public class TaskServiceImpl implements TaskService {
     public Task create(Task task) {
         User user = userAuthenticationService.getCurrentUser();
         task.setUserId(user.getId());
+        task.setDateAdded(new Date());
+        task.setStatus(true);
         taskDao.create(task);
         return task;
     }

@@ -39,19 +39,19 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public Request getRequestById(Long requestId) {
         return requestDao.getRequestById(requestId);
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Request> getAllUserRequests(Long id) {
         return requestDao.getAllUserRequests(id);
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Request> getAllRequestsCurrentUser() {
         return requestDao.getAllUserRequests(userAuthenticationService.getCurrentUser().getId());
     }

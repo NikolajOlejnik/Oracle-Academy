@@ -27,102 +27,44 @@ public class TaskDaoImpl implements TaskDao {
 
     @Override
     public Task create(Task task) {
-        Session session = null;
-        try {
-            task.setDateAdded(new Date());
-            session = sessionFactory.openSession();
-            task.setStatus(true);
-            session.save(task);
-        } catch ( Exception e){
-            e.printStackTrace();
-        }
-
+        sessionFactory.getCurrentSession().save(task);
         return task;
     }
 
     @Override
     public Task getById(Long taskId) {
-        Task task = null;
-        Session session = null;
-        try {
-            session = sessionFactory.openSession();
-            task = (Task) session.get(Task.class, taskId);
-        } catch ( Exception e){
-            e.printStackTrace();
-        }
-        return task;
+        return (Task) sessionFactory.getCurrentSession().get(Task.class, taskId);
     }
 
     @Override
     public List<Task> getAllActual() {
-        Session session = null;
-        List<Task> tasks = new ArrayList<>();
-
-        try{
-            session = sessionFactory.openSession();
-            Criteria criteria = session.createCriteria(Task.class);
-            Criterion actual = Restrictions.eq("status", true);
-            criteria.add(actual);
-            criteria.addOrder(Order.desc("dateAdded"));
-            tasks = criteria.list();
-
-        }catch ( Exception e){
-            e.printStackTrace();
-        }
-        return tasks;
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Task.class);
+        criteria.add(Restrictions.eq("status", true));
+        criteria.addOrder(Order.desc("dateAdded"));
+        return criteria.list();
     }
 
     @Override
     public List<Task> getTaskListByDescription(String request) {
-        Session session = null;
-        List<Task> tasks = new ArrayList<>();
-        try{
-            session = sessionFactory.openSession();
-            Criteria criteria = session.createCriteria(Task.class);
-            Criterion byTitle = Restrictions.like("title", "%" + request + "%");
-            Criterion byDescription = Restrictions.like("description", "%" + request+"%");
-            LogicalExpression orExp = Restrictions.or(byTitle, byDescription);
-            criteria.add(orExp);
-            criteria.addOrder(Order.desc("dateAdded"));
-            tasks = criteria.list();
-
-        }catch ( Exception e){
-            e.printStackTrace();
-        }
-        return tasks;
-
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Task.class);
+        Criterion byTitle = Restrictions.like("title", "%" + request + "%");
+        Criterion byDescription = Restrictions.like("description", "%" + request + "%");
+        criteria.add(Restrictions.or(byTitle, byDescription));
+        criteria.addOrder(Order.desc("dateAdded"));
+        return criteria.list();
     }
 
     @Override
     public List<Task> getTaskListByUserId(Long userId) {
-        Session session = null;
-        List<Task> tasks = new ArrayList<>();
-        try{
-            session = sessionFactory.openSession();
-            Criteria criteria = session.createCriteria(Task.class);
-            Criterion byUserID = Restrictions.eq("userId", userId);
-            criteria.add(byUserID);
-            criteria.addOrder(Order.desc("dateAdded"));
-            tasks = criteria.list();
-
-        }catch ( Exception e){
-            e.printStackTrace();
-        }
-
-        return tasks;
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Task.class);
+        criteria.add(Restrictions.eq("userId", userId));
+        criteria.addOrder(Order.desc("dateAdded"));
+        return criteria.list();
     }
 
     @Override
     public Boolean update(Task task) {
-        Session session = null;
-        try {
-            session = sessionFactory.openSession();
-            session.update(task);
-            session.flush();
-            return true;
-        } catch ( Exception e){
-            e.printStackTrace();
-            return false;
-        }
+        sessionFactory.getCurrentSession().update(task);
+        return true;
     }
 }
