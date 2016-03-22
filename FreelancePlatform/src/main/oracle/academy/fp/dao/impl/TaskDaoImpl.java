@@ -2,21 +2,13 @@ package main.oracle.academy.fp.dao.impl;
 
 import main.oracle.academy.fp.dao.TaskDao;
 import main.oracle.academy.fp.model.Task;
-import main.oracle.academy.fp.model.User;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 @Repository

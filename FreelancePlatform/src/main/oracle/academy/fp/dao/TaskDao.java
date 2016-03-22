@@ -1,7 +1,6 @@
 package main.oracle.academy.fp.dao;
 
 import main.oracle.academy.fp.model.Task;
-import main.oracle.academy.fp.model.User;
 
 import java.util.List;
 

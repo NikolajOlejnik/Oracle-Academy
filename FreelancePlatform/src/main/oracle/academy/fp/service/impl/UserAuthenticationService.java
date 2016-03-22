@@ -25,18 +25,14 @@ public class UserAuthenticationService implements UserDetailsService {
         Set<GrantedAuthority> roles = new HashSet();
         roles.add(new SimpleGrantedAuthority(user.getRole().toString()));
 
-        UserDetails userDetails =
-                new org.springframework.security.core.userdetails.User(user.getLogin(),
-                        user.getPassword(),
-                        roles);
-
-        return userDetails;
+        return new org.springframework.security.core.userdetails.User(user.getLogin(),
+                user.getPassword(),
+                roles);
     }
 
     public User getCurrentUser ()  {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDetails currentUserDetails = (UserDetails) principal;
-        User currentUser = userService.getByLogin(currentUserDetails.getUsername());
-        return currentUser;
+        return userService.getByLogin(currentUserDetails.getUsername());
     }
 }

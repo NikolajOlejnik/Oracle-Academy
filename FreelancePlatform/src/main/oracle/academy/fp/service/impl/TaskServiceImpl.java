@@ -52,8 +52,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional
     public Task getById(Long taskId) {
-        Task task = taskDao.getById(taskId);
-        return task;
+        return taskDao.getById(taskId);
     }
 
     @Override
@@ -71,8 +70,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional
     public User getTaskOwner(Task task) {
-        User user = userDao.getById(task.getUserId());
-        return user;
+        return userDao.getById(task.getUserId());
     }
 
     @Override

@@ -1,17 +1,12 @@
 package main.oracle.academy.fp.dao.impl;
 
 import main.oracle.academy.fp.dao.UserDao;
-import main.oracle.academy.fp.model.Role;
 import main.oracle.academy.fp.model.User;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.LinkedList;
 import java.util.List;
 
 @Repository

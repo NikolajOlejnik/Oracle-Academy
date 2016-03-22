@@ -3,7 +3,6 @@ package main.oracle.academy.fp.web;
 import main.oracle.academy.fp.exceptions.RequestException;
 import main.oracle.academy.fp.exceptions.TaskException;
 import main.oracle.academy.fp.model.Request;
-import main.oracle.academy.fp.model.User;
 import main.oracle.academy.fp.service.RequestService;
 import main.oracle.academy.fp.service.TaskService;
 import main.oracle.academy.fp.service.impl.UserAuthenticationService;
