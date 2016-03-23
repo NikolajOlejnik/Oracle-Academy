@@ -20,17 +20,6 @@
             border: 1px solid #dddddd;
         }
 
-        .panel-white .panel-heading {
-            color: #333;
-            background-color: #fff;
-            border-color: #ddd;
-        }
-
-        .panel-white .panel-footer {
-            background-color: #fff;
-            border-color: #ddd;
-        }
-
         .post .post-heading {
             height: 95px;
             padding: 20px 15px;
@@ -60,30 +49,12 @@
             color: #999;
         }
 
-        .post .post-image .image {
-            width: 100%;
-            height: auto;
-        }
-
         .post .post-description {
             padding: 15px;
         }
 
         .post .post-description p {
             font-size: 14px;
-        }
-
-        .post .post-description .stats {
-            margin-top: 20px;
-        }
-
-        .post .post-description .stats .stat-item {
-            display: inline-block;
-            margin-right: 15px;
-        }
-
-        .post .post-description .stats .stat-item .icon {
-            margin-right: 8px;
         }
 
         .post .post-footer {
@@ -147,7 +118,7 @@
         {
             background-color: #FAFAFA;
             padding: 10px 40px 60px;
-            margin: 10px 0px 60px;
+            margin: 10px 0 60px;
             border: 1px solid GREY;
         }
 
@@ -265,6 +236,5 @@
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>
