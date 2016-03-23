@@ -15,23 +15,14 @@
        <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
               <property name="dataSource" ref="dataSource"/>
               <property name="packagesToScan" value="main.oracle.academy.fp.model"/>
-              <!--Если ваши entity собраны в разных пакетах-->
-              <!-- <property name="packagesToScan" >
-                      <list>
-                             <value>com.firstmappingapping</value>
-                      </list>
-               </property>-->
+
               <property name="hibernateProperties">
                      <props>
                             <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-                            <prop key="hibernate.show_sql">true</prop><!--Hibernate будет выводить сгенерированый SQL в логи-->
-                            <prop key="hibernate.format_sql">true</prop><!--Вывод в логи станет более читабельным-->
-                            <prop key="hibernate.hbm2ddl.auto">update</prop><!--Действие с базой-->
+                            <prop key="hibernate.show_sql">true</prop>
+                            <prop key="hibernate.format_sql">true</prop>
+                            <prop key="hibernate.hbm2ddl.auto">update</prop>
                             <prop key="connection.autocommit">true</prop>
-                            <!--validate: валидирует схему БД не делает изменений в ней
-                             update: изменяет схему в соответствии с мапингом в java
-                             create: создает схему заново, удаляет данные
-                             create-drop: удалят схему со всеми данными в конце работы приложения-->
                      </props>
               </property>
        </bean>
@@ -39,7 +30,5 @@
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
-
-
 
 </beans>

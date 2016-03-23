@@ -24,5 +24,4 @@
         <authentication-provider user-service-ref='userAuthenticationService'/>
     </authentication-manager>
 
-
 </beans:beans>
