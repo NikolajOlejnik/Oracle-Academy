@@ -12,4 +12,10 @@ public class ErrorHandler{
         return "error-404";
     }
 
+    @RequestMapping(value="/403")
+    public String error403(){
+        System.out.println("access denied handler");
+        return "error-403";
+    }
+
 }
