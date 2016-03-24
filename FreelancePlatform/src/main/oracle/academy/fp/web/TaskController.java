@@ -1,5 +1,6 @@
 package main.oracle.academy.fp.web;
 
+import main.oracle.academy.fp.exceptions.UserException;
 import main.oracle.academy.fp.model.Task;
 import main.oracle.academy.fp.service.RequestService;
 import main.oracle.academy.fp.service.TaskService;
@@ -35,8 +36,13 @@ public class TaskController {
 
     @RequestMapping(path = "/user/{userId}/tasklist", method = RequestMethod.GET)
     public String getUserTaskList(ModelMap model, @PathVariable long userId) {
+        try {
+            model.put("user", userService.getById(userId));
+        } catch (UserException e) {
+            e.printStackTrace();
+            return "redirect:/404";
+        }
         model.put("taskList", taskService.getUserTaskList(userId));
-        model.put("user", userService.getById(userId));
         return "usertasklist";
     }
 
@@ -64,8 +70,7 @@ public class TaskController {
     }
 
     @RequestMapping(path = "/addtask", method = RequestMethod.POST)
-    public String addNewTask(@ModelAttribute("task") Task task,
-                             Map<String, Object> model) {
+    public String addNewTask(@ModelAttribute("task") Task task) {
         taskService.create(task);
         return "redirect:/";
     }

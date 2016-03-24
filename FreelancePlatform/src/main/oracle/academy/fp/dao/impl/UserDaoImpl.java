@@ -3,10 +3,12 @@ package main.oracle.academy.fp.dao.impl;
 import main.oracle.academy.fp.dao.UserDao;
 import main.oracle.academy.fp.model.User;
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 @Repository
@@ -23,19 +25,22 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getById(Long id) {
-        return  (User) sessionFactory.getCurrentSession().get(User.class, id);
+        return (User) sessionFactory.getCurrentSession().get(User.class, id);
     }
 
     @Override
     public boolean delete(User user) {
-            sessionFactory.getCurrentSession().delete(user);
-            return true;
+        sessionFactory.getCurrentSession().delete(user);
+        return true;
     }
 
-    //ДОПИСАТЬ!!
     @Override
     public User update(User user) {
-        return null;
+        Session session = sessionFactory.openSession();
+        session.update(user);
+        session.flush();
+        session.close();
+        return user;
     }
 
     @Override
@@ -47,7 +52,7 @@ public class UserDaoImpl implements UserDao {
     public User getByLogin(String login) {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
         criteria.add(Restrictions.eq("login", login));
-        return (User)criteria.uniqueResult();
+        return (User) criteria.uniqueResult();
     }
 
 

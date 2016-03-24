@@ -22,10 +22,10 @@ public class User implements Serializable {
 	@Column(name = "ABOUT")
 	private String about;
 	@Column(name = "ENABLED")
-	private boolean enabled;
+	private boolean enabled = true;
 	@Column(name="USER_ROLE")
 	@Enumerated(EnumType.STRING)
-	private Role role;
+	private Role role = Role.ROLE_USER;
 
 	public Long getId() {
 		return id;
