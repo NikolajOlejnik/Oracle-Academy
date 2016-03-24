@@ -7,18 +7,23 @@
 
 
     <http auto-config="true" use-expressions="true">
+
     <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/createtask" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />
         <intercept-url pattern="/login" access="permitAll"/>
         <intercept-url pattern="/myaccount" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />
         <intercept-url pattern="/mytasks" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />
         <intercept-url pattern="/myrequests" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
+        <intercept-url pattern="/edit/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
         <intercept-url pattern="/**" access="permitAll" />
         <form-login login-page='/login' default-target-url='/'
                     always-use-default-target='false' />
         <logout logout-success-url="/" />
         <csrf disabled="true"/>
     </http>
+
+    <global-method-security pre-post-annotations="enabled"/>
+
 
     <authentication-manager>
         <authentication-provider user-service-ref='userAuthenticationService'/>
