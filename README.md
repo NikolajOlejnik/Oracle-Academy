@@ -1,26 +1,26 @@
-Проект, разработанный в рамках курса Java Enterprise Technologies в Oracle Academy @ KhNURE
+﻿Simple Spring/JPA web-application with authorization and access permission.
 
-Проект представляет собой динамическое веб-приложение "Фриланс-платформа".
+The application had developed during the course of Java Enterprise Technologies by Oracle Academy @ KhNURE.
 
-Использованные инструменты и технологии:
+Tools and Technologies:
 
-Сборка:
-Intellij IDEA;
+IDE:
+Intellij IDEA
+
+Build:
 Maven
 
-DB:
+Core:
+Spring (IoC/DI, MVC)
+
+Data:
 JPA(Hibernate);
 Criteria API;
 MySQL
 
-Core:
-Spring (IoC/DI, MVC);
-
 View:
 JSP + JSTL;
-Bootstrap(JavaScript + jQuery, CSS);
-Ajax;
-JSON
+Bootstrap(JavaScript + jQuery, CSS)
 
 Security:
 Spring Security
