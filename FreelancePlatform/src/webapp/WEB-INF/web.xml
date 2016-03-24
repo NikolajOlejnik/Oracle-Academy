@@ -33,6 +33,16 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.css</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.js</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -61,6 +71,11 @@
     <error-page>
         <error-code>404</error-code>
         <location>/404</location>
+    </error-page>
+
+    <error-page>
+        <error-code>403</error-code>
+        <location>/403</location>
     </error-page>
 
 </web-app>
