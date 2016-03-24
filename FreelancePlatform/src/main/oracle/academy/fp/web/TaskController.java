@@ -2,6 +2,7 @@ package main.oracle.academy.fp.web;
 
 import main.oracle.academy.fp.exceptions.UserException;
 import main.oracle.academy.fp.model.Task;
+import main.oracle.academy.fp.model.User;
 import main.oracle.academy.fp.service.RequestService;
 import main.oracle.academy.fp.service.TaskService;
 import main.oracle.academy.fp.service.UserService;
@@ -31,20 +32,22 @@ public class TaskController {
     @RequestMapping(path = "/user/{userId}/tasklist", method = RequestMethod.GET)
     public String getUserTaskList(ModelMap model, @PathVariable long userId) {
         try {
-            model.put("user", userService.getById(userId));
+            User user = userService.getById(userId);
+            model.put("user", user);
+            model.put("taskList", user.getTasks());
         } catch (UserException e) {
             e.printStackTrace();
             return "redirect:/404";
         }
-        model.put("taskList", taskService.getUserTaskList(userId));
         return "usertasklist";
     }
 
 
     @RequestMapping(path = "/mytasks", method = RequestMethod.GET)
     public String getMyTaskList(ModelMap model) {
-        model.put("taskList", taskService.getCurrentUserTaskList());
-        model.put("user", userAuthenticationService.getCurrentUser());
+        User user = userAuthenticationService.getCurrentUser();
+        model.put("taskList", user.getTasks());
+        model.put("user", user);
         return "usertasklist";
     }
 
@@ -53,8 +56,7 @@ public class TaskController {
     public String getTask(ModelMap model, @PathVariable long taskId) {
         Task task = taskService.getById(taskId);
         model.put("task", task);
-        model.put("taskOwner", taskService.getTaskOwner(task));
-        model.put("requestList", requestService.getAllRequestByTaskId(task.getId()));
+        model.put("requestList", task.getRequestList());
         return "task";
     }
 

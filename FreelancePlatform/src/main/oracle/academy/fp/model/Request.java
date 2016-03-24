@@ -17,11 +17,9 @@ public class Request implements Serializable {
     @Column(name = "TASK_ID")
     private long taskId;
 
-    @Column(name = "USER_ID")
-    private Long userId;
-
-    @Column(name = "USER_NAME")
-    private String userName;
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
 
     @Column(name = "COMMENT")
     private String comment;
@@ -34,6 +32,14 @@ public class Request implements Serializable {
     private boolean status;
 
     public Request() {
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public long getId() {
@@ -50,14 +56,6 @@ public class Request implements Serializable {
 
     public void setTaskId(long taskId) {
         this.taskId = taskId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public String getComment() {
@@ -84,20 +82,13 @@ public class Request implements Serializable {
         this.status = status;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     @Override
     public String toString() {
         return "Request["
                 + " id: " + this.id
                 + ", taskId: " + this.taskId
-                + ", userId: " + this.userId
+                + ", userId: " + this.user.getId()
                 + ", comment: " + this.comment
                 + ", dateAdded: " + this.dateAdded
                 + ", status: " + this.status

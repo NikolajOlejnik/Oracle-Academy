@@ -3,6 +3,7 @@ package main.oracle.academy.fp.web;
 import main.oracle.academy.fp.exceptions.RequestException;
 import main.oracle.academy.fp.exceptions.TaskException;
 import main.oracle.academy.fp.model.Request;
+import main.oracle.academy.fp.model.User;
 import main.oracle.academy.fp.service.RequestService;
 import main.oracle.academy.fp.service.TaskService;
 import main.oracle.academy.fp.service.impl.UserAuthenticationService;
@@ -31,8 +32,9 @@ public class RequestController {
 
     @RequestMapping(path = "/myrequests", method = RequestMethod.GET)
     public String getMyRequestsList(ModelMap model) {
-        model.put("requestlist", requestService.getAllRequestsCurrentUser());
-        model.put("user", userAuthenticationService.getCurrentUser());
+        User user = userAuthenticationService.getCurrentUser();
+        model.put("user", user);
+        model.put("requestlist", user.getRequests());
         return "requestlist";
     }
 
@@ -45,7 +47,7 @@ public class RequestController {
             e.printStackTrace();
             return "/404";
         }
-        return "redirect:/user/" + request.getUserId();
+        return "redirect:/user/" + request.getUser().getId();
     }
 
 }

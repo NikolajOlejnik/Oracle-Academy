@@ -24,14 +24,6 @@ public class RequestDaoImpl implements RequestDao {
     }
 
     @Override
-    public List<Request> getAllRequestByTaskId(Long taskId) {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Request.class);
-        criteria.add(Restrictions.eq("taskId", taskId));
-        criteria.addOrder(Order.desc("dateAdded"));
-        return criteria.list();
-    }
-
-    @Override
     public Request getRequestById(Long requestId) {
         return (Request) sessionFactory.getCurrentSession().get(Request.class, requestId);
     }
@@ -42,12 +34,5 @@ public class RequestDaoImpl implements RequestDao {
         return true;
     }
 
-    @Override
-    public List<Request> getAllUserRequests(Long id) {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Request.class);
-        criteria.add(Restrictions.eq("userId", id));
-        criteria.addOrder(Order.desc("dateAdded"));
-        return criteria.list();
-    }
 
 }

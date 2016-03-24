@@ -47,14 +47,6 @@ public class TaskDaoImpl implements TaskDao {
     }
 
     @Override
-    public List<Task> getTaskListByUserId(Long userId) {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Task.class);
-        criteria.add(Restrictions.eq("userId", userId));
-        criteria.addOrder(Order.desc("dateAdded"));
-        return criteria.list();
-    }
-
-    @Override
     public Boolean update(Task task) {
         sessionFactory.getCurrentSession().update(task);
         return true;

@@ -3,6 +3,7 @@ package main.oracle.academy.fp.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "tasks")
@@ -13,8 +14,13 @@ public class Task implements Serializable {
     @Column(name = "TASK_ID")
     private Long id;
 
-    @Column(name = "USER_ID")
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "TASK_ID")
+    private List<Request> requestList;
 
     @Column(name = "PRICE")
     private String price;
@@ -32,16 +38,6 @@ public class Task implements Serializable {
     @Column(name = "TASK_STATUS")
     private Boolean status;
 
-//    private String smallDescription;
-//
-//    public String getSmallDescription() {
-//        StringBuilder sb = new StringBuilder(this.description);
-//        sb.delete(30, sb.length());
-//        sb.append("...");
-//        return sb.toString();
-//    }
-    //private List<Request> requests;
-
     public Task() {
     }
 
@@ -53,14 +49,21 @@ public class Task implements Serializable {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
+    public List<Request> getRequestList() {
+        return requestList;
+    }
+
+    public void setRequestList(List<Request> requestList) {
+        this.requestList = requestList;
+    }
 
     public String getPrice() {
         return price;
@@ -116,7 +119,7 @@ public class Task implements Serializable {
     public String toString() {
         return "Task["
                 + " id: " + this.id
-                + ", user_id: " + this.userId
+                + ", user_id: " + this.user.getId()
                 + ", price: " + this.price
                 + ", title: " + this.title
                 + ", description: " + this.description

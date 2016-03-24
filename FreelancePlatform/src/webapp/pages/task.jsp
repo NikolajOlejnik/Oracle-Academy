@@ -111,11 +111,11 @@
             margin-left: 50px;
         }
 
-        .red{
-            color:red;
+        .red {
+            color: red;
         }
-        .form-area
-        {
+
+        .form-area {
             background-color: #FAFAFA;
             padding: 10px 40px 60px;
             margin: 10px 0 60px;
@@ -125,7 +125,7 @@
     </style>
     <script type="text/javascript">
 
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('#characterLeft').text('140 символов осталось');
             $('#message').keydown(function () {
                 var max = 140;
@@ -143,8 +143,8 @@
                 }
             });
         });
-        $(document).ready(function(){
-            $(".btn-primary").click(function(){
+        $(document).ready(function () {
+            $(".btn-primary").click(function () {
                 $(".collapse").toggle("slow");
             });
         });
@@ -153,7 +153,7 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-<sec:authentication var="principal" property="principal" />
+<sec:authentication var="principal" property="principal"/>
 <%--<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">--%>
 <div class="container">
     <div class="col-sm-8">
@@ -165,7 +165,7 @@
                 </div>
                 <div class="pull-left meta">
                     <div class="title h5">
-                        <a href="/user/${taskOwner.id}"><b>${taskOwner.name}</b></a>
+                        <a href="/user/${task.user.id}"><b>${task.user.name}</b></a>
                         предложил работу:
                     </div>
                     <h6 class="text-muted time"><i class="fa fa-clock-o"></i>
@@ -179,28 +179,35 @@
             <div class="post-footer">
                 <sec:authorize access="!isAuthenticated()"> Если хотите оставить заявку - <a href="/login">
                     войдите <i class="fa fa-sign-in"></i>
-                    или зарегистрируйтесь <i class="fa fa-user-plus"></i></a> <br> <br>  </sec:authorize>
-                <b> Претенденты: </b>
+                    или зарегистрируйтесь <i class="fa fa-user-plus"></i></a> <br> <br> </sec:authorize>
+                <c:if test="${requestList.isEmpty()}">
+                    Заявок пока нет...
+                    <br>
+                </c:if>
+                <c:if test="${!requestList.isEmpty()}">
+                    <b> Претенденты: </b>
                     <ul class="comments-list">
                         <tr>
                             <c:forEach items="${requestList}" var="request">
                                 <li class="comment panel-shadow panel-white">
 
-                                    <a class="pull-left" href="/user/${request.userId}">
+                                    <a class="pull-left" href="/user/${request.user.id}">
                                         <img class="avatar" src="../resources/images/anonymous.png"
                                              alt="avatar">
                                     </a>
 
                                     <div class="comment-body">
                                         <sec:authorize access="isAuthenticated()">
-                                        <c:if test="${taskOwner.login == principal.username && task.status}">
-                                        <a class="btn btn-success pull-right" href="/task/acceptrequest/${task.id}/${request.id}">Принять запрос <em class="fa fa-check-square-o"></em></a>
-                                        </c:if>
+                                            <c:if test="${task.user.login == principal.username && task.status}">
+                                                <a class="btn btn-success pull-right"
+                                                   href="/task/acceptrequest/${task.id}/${request.id}">Принять запрос
+                                                    <em class="fa fa-check-square-o"></em></a>
+                                            </c:if>
                                         </sec:authorize>
 
                                         <div class="comment-heading">
                                             <div class="title h4"><a
-                                                    href="/user/${request.userId}"> ${request.userName} </a></div>
+                                                    href="/user/${request.user.id}"> ${request.user.name} </a></div>
                                             <h5 class="time"><fmt:formatDate pattern="yyyy-MM-dd H:mm"
                                                                              value="${request.dateAdded}"/></h5>
 
@@ -212,29 +219,36 @@
                             </c:forEach>
                         </tr>
                     </ul>
+                </c:if>
+
                 <sec:authorize access="isAuthenticated()">
-                    <%--<sec:authentication var="principal" property="principal" />--%>
-                    <c:if test="${taskOwner.login != principal.username && task.status}">
-                    <button type="button" class="btn btn-primary">Оставить заявку <i class="fa fa-caret-square-o-down"></i>
-                    </button>
-                    <div class="collapse">
+                    <c:if test="${task.user.login != principal.username && task.status}">
+                        <button type="button" class="btn btn-primary">Оставить заявку <i
+                                class="fa fa-caret-square-o-down"></i>
+                        </button>
+                        <div class="collapse">
                             <div class="form-area">
                                 <form role="form" action="/sendrequest" method="post" commandName="request">
                                     <br style="clear:both">
+
                                     <div class="form-group">
-                                        <textarea class="form-control" name="comment" type="textarea" id="message" placeholder="Оставьте комментарий к заявке" maxlength="140" rows="7"></textarea>
+                                        <textarea class="form-control" name="comment" type="textarea" id="message"
+                                                  placeholder="Оставьте комментарий к заявке" maxlength="140"
+                                                  rows="7"></textarea>
                                         <input type="hidden" name="taskId" value="${task.id}"/>
-                                        <span class="help-block"><p id="characterLeft" class="help-block ">Вы достигли лимита</p></span>
+                                        <span class="help-block"><p id="characterLeft" class="help-block ">Вы достигли
+                                            лимита</p></span>
                                     </div>
-                                    <button id="btn-login" type="submit" class="btn btn-success">Отправить запрос <i class="fa fa-sign-in"></i></button>
+                                    <button id="btn-login" type="submit" class="btn btn-success">Отправить запрос <i
+                                            class="fa fa-sign-in"></i></button>
                                 </form>
                             </div>
-                    </div>
+                        </div>
                     </c:if>
                 </sec:authorize>
-                </div>
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>

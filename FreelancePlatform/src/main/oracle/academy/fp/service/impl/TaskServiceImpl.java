@@ -33,7 +33,7 @@ public class TaskServiceImpl implements TaskService {
     @Transactional
     public Task create(Task task) {
         User user = userAuthenticationService.getCurrentUser();
-        task.setUserId(user.getId());
+        task.setUser(user);
         task.setDateAdded(new Date());
         task.setStatus(true);
         taskDao.create(task);
@@ -61,17 +61,6 @@ public class TaskServiceImpl implements TaskService {
         return taskDao.getAllActual();
     }
 
-    @Override
-    @Transactional
-    public List<Task> getUserTaskList(Long userId) {
-        return taskDao.getTaskListByUserId(userId);
-    }
-
-    @Override
-    @Transactional
-    public User getTaskOwner(Task task) {
-        return userDao.getById(task.getUserId());
-    }
 
     @Override
     @Transactional
@@ -98,9 +87,4 @@ public class TaskServiceImpl implements TaskService {
             throw new TaskException();
     }
 
-    @Override
-    @Transactional
-    public List<Task> getCurrentUserTaskList() {
-        return taskDao.getTaskListByUserId(userAuthenticationService.getCurrentUser().getId());
-    }
 }

@@ -52,10 +52,8 @@
                 <sec:authorize access="isAuthenticated()">
                 <c:if test="${user.login == principal.username}">
               <td align="center">
-
                 <a class="btn btn-default" ><em class="fa fa-pencil"></em></a>
                 <a class="btn btn-danger" href="/delete/${user.id}" method="GET"><em class="fa fa-trash"></em></a>
-
               </td>
                 </c:if>
                 </sec:authorize>

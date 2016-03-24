@@ -1,7 +1,12 @@
 package main.oracle.academy.fp.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -22,10 +27,25 @@ public class User implements Serializable {
 	@Column(name = "ABOUT")
 	private String about;
 	@Column(name = "ENABLED")
-	private boolean enabled = true;
+	private boolean enabled;
 	@Column(name="USER_ROLE")
 	@Enumerated(EnumType.STRING)
-	private Role role = Role.ROLE_USER;
+	private Role role;
+
+	@OneToMany(fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
+	@JoinColumn(name = "USER_ID")
+	private List <Task> tasks;
+
+	@OneToMany(fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
+	@JoinColumn(name = "USER_ID")
+	private List <Request> requests;
+
+	public User() {
+		this.setEnabled(true);
+		this.setRole(Role.ROLE_USER);
+	}
 
 	public Long getId() {
 		return id;
@@ -89,6 +109,22 @@ public class User implements Serializable {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public List <Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List <Task> tasks) {
+		this.tasks = tasks;
+	}
+
+	public List<Request> getRequests() {
+		return requests;
+	}
+
+	public void setRequests(List<Request> requests) {
+		this.requests = requests;
 	}
 
 	@Override

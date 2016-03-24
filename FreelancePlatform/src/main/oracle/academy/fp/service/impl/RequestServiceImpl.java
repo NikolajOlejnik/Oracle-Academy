@@ -23,37 +23,18 @@ public class RequestServiceImpl implements RequestService {
     @Transactional
     public Request sendRequest(Request request) {
         User user = userAuthenticationService.getCurrentUser();
-        request.setUserId(user.getId());
-        request.setUserName(user.getName());
+        request.setUser(user);
         request.setDateAdded(new Date());
         request.setStatus(false);
         requestDao.create(request);
         return request;
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<Request> getAllRequestByTaskId(Long taskId) {
-
-        return requestDao.getAllRequestByTaskId (taskId);
-    }
 
     @Override
     @Transactional(readOnly = true)
     public Request getRequestById(Long requestId) {
         return requestDao.getRequestById(requestId);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Request> getAllUserRequests(Long id) {
-        return requestDao.getAllUserRequests(id);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Request> getAllRequestsCurrentUser() {
-        return requestDao.getAllUserRequests(userAuthenticationService.getCurrentUser().getId());
     }
 
 }
