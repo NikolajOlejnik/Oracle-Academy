@@ -81,5 +81,17 @@ public class UserServiceImpl implements UserService {
         return userDao.getAll();
     }
 
+    @Override
+    @Transactional
+    public void makeAdmin(long userId) throws UserException {
+        User user = userDao.getById(userId);
+        if (user == null) {
+            throw new UserException();
+        } else {
+            user.setRole(Role.ROLE_ADMIN);
+            userDao.update(user);
+        }
+    }
+
 
 }

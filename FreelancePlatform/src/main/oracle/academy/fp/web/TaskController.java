@@ -28,12 +28,6 @@ public class TaskController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(path = "/", method = RequestMethod.GET)
-    public String getTaskList(ModelMap model) {
-        model.put("taskList", taskService.getActualTaskList());
-        return "index";
-    }
-
     @RequestMapping(path = "/user/{userId}/tasklist", method = RequestMethod.GET)
     public String getUserTaskList(ModelMap model, @PathVariable long userId) {
         try {

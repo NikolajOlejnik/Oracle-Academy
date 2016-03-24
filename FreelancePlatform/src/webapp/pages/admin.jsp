@@ -36,22 +36,49 @@
                     <table class="table table-striped table-bordered table-list">
                         <thead>
                         <tr>
-                            <th><em class="fa fa-cog"></em></th>
-                            <th class="hidden-xs">ID</th>
                             <th>Логин</th>
                             <th>Имя пользователя</th>
+                            <th>Управление аккаунтом</th>
+                            <th>Права администратора</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <c:forEach items="${usersList}" var="user">
-                            <td align="center">
-                                <a class="btn btn-default" ><em class="fa fa-pencil"></em></a>
-                                <a class="btn btn-danger" href="/delete/${user.id}" method="GET"><em class="fa fa-trash"></em></a>
-                            </td>
-                            <td class="hidden-xs">${user.id}</td>
                             <td>${user.login}</td>
                             <td>${user.name}</td>
+                            <td>
+                                <a class="btn btn-default" href="/edit/user/${user.id}" >
+                                    <span class="fa-stack">
+  <i class="fa fa-pencil fa-stack-1x"></i>
+</span>Редактировать</a>
+                                <a class="btn btn-default" href="/delete/user/${user.id}" >
+                                    <span class="fa-stack">
+  <i class="fa fa-user fa-stack-1x"></i>
+  <i class="fa fa-ban fa-stack-2x text-danger"></i>
+</span>Забанить</a>
+
+                            </td>
+                            <td>
+                                <c:if test="${user.role == 'ROLE_USER'}">
+                                    <a class="btn btn-default" href="/makeadmin/user/${user.id}" >
+                                        <span class="fa-stack">
+                                            <i class="fa fa-square-o fa-stack-2x"></i>
+                                            <i class="fa fa-thumbs-up fa-stack-1x"></i>
+                                        </span>
+                                        Сделать администратором<br>
+                                    </a>
+                                </c:if>
+                                <c:if test="${user.role == 'ROLE_ADMIN'}">
+                                    <a class="btn btn-default" href="/reduce/user/${user.id}">
+                                    <span class="fa-stack">
+                                            <i class="fa fa-square-o fa-stack-2x text-danger"></i>
+                                            <i class="fa fa-thumbs-down fa-stack-1x"></i>
+                                    </span>Забрать права администратора<br>
+                                    </a>
+                                </c:if>
+
+                            </td>
                         </tr>
                         </tbody>
                         </c:forEach>

@@ -11,4 +11,6 @@ public interface UserDao {
 	User update(User user);
 	List<User> getAll();
 	User getByLogin(String login);
+
+
 }

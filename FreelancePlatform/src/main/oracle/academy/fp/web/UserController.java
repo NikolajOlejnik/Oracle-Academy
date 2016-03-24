@@ -24,13 +24,6 @@ public class UserController {
     @Autowired
     private UserAuthenticationService userAuthenticationService;
 
-
-    @RequestMapping(path = "/admin", method = RequestMethod.GET)
-    public String getUserList(ModelMap model) {
-        model.put("usersList", userService.getUsersList());
-        return "userlist";
-    }
-
     @RequestMapping(path = "/myaccount", method = RequestMethod.GET)
     public String getCurrentUserAccount(ModelMap model) {
         User user = userAuthenticationService.getCurrentUser();
@@ -61,16 +54,6 @@ public class UserController {
         return "register/success";
     }
 
-    @RequestMapping(path = "/delete/{userId}", method = RequestMethod.GET)
-    public String getUserDelete(ModelMap model, @PathVariable long userId) {
-        try {
-            userService.delete(userId);
-            return "redirect:/admin";
-        } catch (UserException e) {
-            e.printStackTrace();
-            return "redirect:/404";
-        }
-    }
 
     @RequestMapping(path = "/reg", method = RequestMethod.GET)
     public String regNewUser() {
@@ -102,20 +85,5 @@ public class UserController {
             return "redirect:/404";
         }
         return "redirect:/user/" + userId;
-    }
-
-    @RequestMapping(value = "/page", method = RequestMethod.GET)
-    public String printWelcome() {
-        return "hello";
-    }
-
-    @RequestMapping(value = "/ajaxtest", method = RequestMethod.GET)
-    @ResponseBody
-    public Set<String> ajaxTest() {
-        Set<String> records = new HashSet<String>();
-        records.add("Record #1");
-        records.add("Record #2");
-
-        return records;
     }
 }
