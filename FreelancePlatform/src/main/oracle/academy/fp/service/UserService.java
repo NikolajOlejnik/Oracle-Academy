@@ -20,4 +20,8 @@ public interface UserService {
     List<User> getUsersList();
 
     void makeAdmin(long userId) throws UserException;
+
+    User getUserWithTasks(long userId) throws UserException;
+
+    User getByLoginWithJoins(String login);
 }

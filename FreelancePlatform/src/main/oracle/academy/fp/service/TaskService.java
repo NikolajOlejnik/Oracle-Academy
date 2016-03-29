@@ -13,4 +13,5 @@ public interface TaskService {
     Task getById (Long taskId);
     List <Task> getActualTaskList();
     Boolean acceptRequest(Long taskId, Long requestId) throws TaskException, RequestException;
+    Task getTaskWithRequests(Long taskId);
 }

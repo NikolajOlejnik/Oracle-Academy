@@ -9,10 +9,11 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 @Repository
-public class TaskDaoImpl extends BaseDao <Task> implements TaskDao <Task> {
+public class TaskDaoImpl extends BaseDao<Task> implements TaskDao<Task> {
 
     @Override
     public List<Task> getAllActual() {
@@ -20,6 +21,17 @@ public class TaskDaoImpl extends BaseDao <Task> implements TaskDao <Task> {
         criteria.add(Restrictions.eq("status", true));
         criteria.addOrder(Order.desc("dateAdded"));
         return criteria.list();
+    }
+
+    /*
+    void .size() avoid LazyInitializationException
+   */
+
+    @Override
+    public Task getTaskWithRequests(Long taskId) {
+        Task task = super.read(taskId);
+        task.getRequestList().size();
+        return task;
     }
 
 

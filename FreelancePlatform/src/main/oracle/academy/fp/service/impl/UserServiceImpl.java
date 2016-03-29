@@ -42,6 +42,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
+    public User getUserWithTasks(long userId) throws UserException {
+        User user = (User) userDao.getUserWithTasks(userId);
+        if (user == null) {
+            throw new UserException();
+        }
+        return user;
+    }
+
+    @Override
+    @Transactional
+    public User getByLoginWithJoins(String login) {
+        return (User) userDao.getByLoginWithJoins(login);
+    }
+
+    @Override
+    @Transactional
     public User getByLogin(String login) {
         return (User) userDao.getByLogin(login);
     }
@@ -96,6 +112,5 @@ public class UserServiceImpl implements UserService {
             userDao.update(user);
         }
     }
-
 
 }

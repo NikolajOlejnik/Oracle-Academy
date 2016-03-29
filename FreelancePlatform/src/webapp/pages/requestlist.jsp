@@ -38,7 +38,7 @@
             </thead>
             <tbody>
             <tr>
-              <c:forEach items="${requestlist}" var="request">
+              <c:forEach items="${user.requests}" var="request">
                 <%--<c:if test="${!request.status && request.}">--%>
 
               <td >${request.dateAdded}</td>

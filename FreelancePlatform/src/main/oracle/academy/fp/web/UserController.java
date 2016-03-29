@@ -31,6 +31,20 @@ public class UserController {
         return "profile";
     }
 
+    @RequestMapping(path = "/myrequests", method = RequestMethod.GET)
+    public String getMyRequestsList(ModelMap model) {
+        User user = userAuthenticationService.getCurrentUserWithJoins();
+        model.put("user", user);
+        return "requestlist";
+    }
+
+    @RequestMapping(path = "/mytasks", method = RequestMethod.GET)
+    public String getMyTaskList(ModelMap model) {
+        User user = userAuthenticationService.getCurrentUserWithJoins();
+        model.put("user", user);
+        return "usertasklist";
+    }
+
     @RequestMapping(path = "/user/{userId}", method = RequestMethod.GET)
     public String getUserProfile(ModelMap model, @PathVariable long userId) {
         try {

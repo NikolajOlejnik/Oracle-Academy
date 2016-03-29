@@ -22,8 +22,6 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private TaskDao taskDao;
     @Autowired
-    private UserDao userDao;
-    @Autowired
     private RequestDao requestDao;
     @Autowired
     private UserAuthenticationService userAuthenticationService;
@@ -55,14 +53,17 @@ public class TaskServiceImpl implements TaskService {
         return (Task) taskDao.read(taskId);
     }
 
+    @Transactional
+    @Override
+    public Task getTaskWithRequests(Long taskId) {
+        return (Task) taskDao.getTaskWithRequests (taskId);
+    }
+
     @Override
     @Transactional
     public List<Task> getActualTaskList() {
         return taskDao.getAllActual();
     }
-
-
-
 
     @Override
     @Transactional

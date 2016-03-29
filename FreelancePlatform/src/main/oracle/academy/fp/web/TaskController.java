@@ -32,7 +32,7 @@ public class TaskController {
     @RequestMapping(path = "/user/{userId}/tasklist", method = RequestMethod.GET)
     public String getUserTaskList(ModelMap model, @PathVariable long userId) {
         try {
-            User user = userService.getById(userId);
+            User user = userService.getUserWithTasks(userId);
             model.put("user", user);
             model.put("taskList", user.getTasks());
         } catch (UserException e) {
@@ -43,20 +43,10 @@ public class TaskController {
     }
 
 
-    @RequestMapping(path = "/mytasks", method = RequestMethod.GET)
-    public String getMyTaskList(ModelMap model) {
-        User user = userAuthenticationService.getCurrentUser();
-        model.put("taskList", user.getTasks());
-        model.put("user", user);
-        return "usertasklist";
-    }
-
-
     @RequestMapping(path = "/task/{taskId}", method = RequestMethod.GET)
     public String getTask(ModelMap model, @PathVariable long taskId) {
-        Task task = taskService.getById(taskId);
+        Task task = taskService.getTaskWithRequests(taskId);
         model.put("task", task);
-        model.put("requestList", task.getRequestList());
         return "task";
     }
 

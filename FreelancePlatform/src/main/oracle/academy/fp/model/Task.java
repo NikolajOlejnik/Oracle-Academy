@@ -18,7 +18,7 @@ public class Task implements Serializable {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     @JoinColumn(name = "TASK_ID")
     private List<Request> requestList;
 

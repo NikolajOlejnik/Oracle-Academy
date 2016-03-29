@@ -180,15 +180,15 @@
                 <sec:authorize access="!isAuthenticated()"> Если хотите оставить заявку - <a href="/login">
                     войдите <i class="fa fa-sign-in"></i>
                     или зарегистрируйтесь <i class="fa fa-user-plus"></i></a> <br> <br> </sec:authorize>
-                <c:if test="${requestList.isEmpty()}">
+                <c:if test="${task.requestList.isEmpty()}">
                     Заявок пока нет...
                     <br>
                 </c:if>
-                <c:if test="${!requestList.isEmpty()}">
+                <c:if test="${!task.requestList.isEmpty()}">
                     <b> Претенденты: </b>
                     <ul class="comments-list">
                         <tr>
-                            <c:forEach items="${requestList}" var="request">
+                            <c:forEach items="${task.requestList}" var="request">
                                 <li class="comment panel-shadow panel-white">
 
                                     <a class="pull-left" href="/user/${request.user.id}">

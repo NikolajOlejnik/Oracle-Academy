@@ -16,29 +16,34 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "USER_ID")
 	private Long id;
+
 	@Column(name = "LOGIN", unique=true)
 	private String login;
+
 	@Column(name = "PASSWORD")
 	private String password;
+
 	@Column(name = "EMAIL")
 	private String email;
+
 	@Column(name = "NAME")
 	private String name;
+
 	@Column(name = "ABOUT")
 	private String about;
+
 	@Column(name = "ENABLED")
 	private boolean enabled;
+
 	@Column(name="USER_ROLE")
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
+	@OneToMany
 	@JoinColumn(name = "USER_ID")
 	private List <Task> tasks;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	@Fetch(value = FetchMode.SUBSELECT)
+	@OneToMany
 	@JoinColumn(name = "USER_ID")
 	private List <Request> requests;
 

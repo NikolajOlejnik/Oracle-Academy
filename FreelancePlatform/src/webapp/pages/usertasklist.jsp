@@ -47,7 +47,7 @@
             </thead>
             <tbody>
             <tr>
-              <c:forEach items="${taskList}" var="task">
+              <c:forEach items="${user.tasks}" var="task">
                 <sec:authentication var="principal" property="principal" />
                 <sec:authorize access="isAuthenticated()">
                 <c:if test="${user.login == principal.username}">

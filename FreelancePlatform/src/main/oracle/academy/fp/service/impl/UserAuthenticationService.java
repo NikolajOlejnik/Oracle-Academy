@@ -35,4 +35,10 @@ public class UserAuthenticationService implements UserDetailsService {
         UserDetails currentUserDetails = (UserDetails) principal;
         return userService.getByLogin(currentUserDetails.getUsername());
     }
+
+    public User getCurrentUserWithJoins() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails currentUserDetails = (UserDetails) principal;
+        return userService.getByLoginWithJoins(currentUserDetails.getUsername());
+    }
 }
