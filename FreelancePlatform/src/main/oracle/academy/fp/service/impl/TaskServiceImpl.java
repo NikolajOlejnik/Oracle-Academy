@@ -36,7 +36,7 @@ public class TaskServiceImpl implements TaskService {
         task.setUser(user);
         task.setDateAdded(new Date());
         task.setStatus(true);
-        taskDao.create(task);
+        taskDao.add(task);
         return task;
     }
 
@@ -52,7 +52,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional
     public Task getById(Long taskId) {
-        return taskDao.getById(taskId);
+        return (Task) taskDao.read(taskId);
     }
 
     @Override
@@ -62,17 +62,13 @@ public class TaskServiceImpl implements TaskService {
     }
 
 
-    @Override
-    @Transactional
-    public List<Task> getTaskListByDescription(String request) {
-        return taskDao.getTaskListByDescription(request);
-    }
+
 
     @Override
     @Transactional
     public Boolean acceptRequest(Long taskId, Long requestId) throws TaskException, RequestException {
         Task task = getById(taskId);
-        Request request = requestDao.getRequestById(requestId);
+        Request request = (Request) requestDao.read(requestId);
         if (task != null) {
             if (request != null) {
                 task.setStatus(false);

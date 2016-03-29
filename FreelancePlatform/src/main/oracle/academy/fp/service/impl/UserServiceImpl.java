@@ -1,5 +1,6 @@
 package main.oracle.academy.fp.service.impl;
 
+import main.oracle.academy.fp.dao.Dao;
 import main.oracle.academy.fp.exceptions.UserException;
 import main.oracle.academy.fp.model.Role;
 import main.oracle.academy.fp.service.UserService;
@@ -17,6 +18,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
+
     @Autowired
     private UserAuthenticationService userAuthenticationService;
 
@@ -24,14 +26,14 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User create(User user) {
         user.setEnabled(true);
-        userDao.create(user);
+        userDao.add(user);
         return user;
     }
 
     @Override
     @Transactional
     public User getById(Long id) throws UserException {
-        User user = userDao.getById(id);
+        User user = (User) userDao.read(id);
         if (user == null) {
             throw new UserException();
         }
@@ -41,15 +43,15 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User getByLogin(String login) {
-        return userDao.getByLogin(login);
+        return (User) userDao.getByLogin(login);
     }
 
     @Override
     @Transactional
     public void delete(Long id) throws UserException {
-        User user = userDao.getById(id);
+        User user = (User) userDao.read(id);
         if (user != null) {
-            userDao.delete(user);
+            userDao.delete(user.getId());
         } else {
             throw new UserException();
         }
@@ -57,16 +59,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User update(Long userId, User user) throws UserException {
+    public User update(Long userId, User userToUpdate) throws UserException {
+        User user = (User) userDao.read(userId);
+        if (user == null) {
+            throw new UserException();
+        }
         User currentUser = userAuthenticationService.getCurrentUser();
         if (currentUser.getId() == userId) {
-            user.setId(currentUser.getId());
-            user.setRole(currentUser.getRole());
-            userDao.update(user);
-            return user;
+            userToUpdate.setId(currentUser.getId());
+            userToUpdate.setRole(currentUser.getRole());
+            userDao.update(userToUpdate);
+            return userToUpdate;
         } else if (currentUser.getRole() == Role.ROLE_ADMIN) {
-            user.setId(userId);
-            user.setRole(userDao.getById(userId).getRole());
             userDao.update(user);
             return user;
         } else {
@@ -78,13 +82,13 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public List<User> getUsersList() {
 
-        return userDao.getAll();
+        return (List<User>) userDao.getAll();
     }
 
     @Override
     @Transactional
     public void makeAdmin(long userId) throws UserException {
-        User user = userDao.getById(userId);
+        User user = (User) userDao.read(userId);
         if (user == null) {
             throw new UserException();
         } else {

@@ -4,10 +4,6 @@ import main.oracle.academy.fp.model.Task;
 
 import java.util.List;
 
-public interface TaskDao {
-    Task create (Task task);
-    Task getById (Long taskId);
+public interface TaskDao <Task> extends Dao <Task> {
     List<Task> getAllActual();
-    List<Task> getTaskListByDescription(String request);
-    Boolean update(Task task);
 }

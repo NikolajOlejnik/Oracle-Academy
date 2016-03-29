@@ -12,6 +12,5 @@ public interface TaskService {
     Task update (Task task) throws TaskException;
     Task getById (Long taskId);
     List <Task> getActualTaskList();
-    List <Task> getTaskListByDescription(String request);
     Boolean acceptRequest(Long taskId, Long requestId) throws TaskException, RequestException;
 }

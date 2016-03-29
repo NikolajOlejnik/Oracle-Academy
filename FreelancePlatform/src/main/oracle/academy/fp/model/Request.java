@@ -14,8 +14,9 @@ public class Request implements Serializable {
     @Column(name = "REQUEST_ID")
     private long id;
 
-    @Column(name = "TASK_ID")
-    private long taskId;
+    @ManyToOne
+    @JoinColumn(name = "TASK_ID")
+    private Task task;
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")
@@ -50,12 +51,12 @@ public class Request implements Serializable {
         this.id = id;
     }
 
-    public long getTaskId() {
-        return taskId;
+    public Task getTask() {
+        return task;
     }
 
-    public void setTaskId(long taskId) {
-        this.taskId = taskId;
+    public void setTask(Task task) {
+        this.task = task;
     }
 
     public String getComment() {
@@ -87,7 +88,7 @@ public class Request implements Serializable {
     public String toString() {
         return "Request["
                 + " id: " + this.id
-                + ", taskId: " + this.taskId
+                + ", taskId: " + this.task.getId()
                 + ", userId: " + this.user.getId()
                 + ", comment: " + this.comment
                 + ", dateAdded: " + this.dateAdded

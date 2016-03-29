@@ -24,10 +24,10 @@ public class RequestController {
     @Autowired
     private TaskService taskService;
 
-    @RequestMapping(path = "/sendrequest", method = RequestMethod.POST)
-    public String sendRequest(@ModelAttribute("request") Request request, Map<String, Object> model) {
-        requestService.sendRequest(request);
-        return "redirect:/task/" + request.getTaskId();
+    @RequestMapping(path = "/task/{taskId}/sendrequest", method = RequestMethod.POST)
+    public String sendRequest(@PathVariable long taskId, @ModelAttribute("request") Request request, Map<String, Object> model) {
+        requestService.sendRequest(taskId, request);
+        return "redirect:/task/" + request.getTask().getId();
     }
 
     @RequestMapping(path = "/myrequests", method = RequestMethod.GET)

@@ -228,7 +228,7 @@
                         </button>
                         <div class="collapse">
                             <div class="form-area">
-                                <form role="form" action="/sendrequest" method="post" commandName="request">
+                                <form role="form" action="/task/${task.id}/sendrequest" method="post" commandName="request">
                                     <br style="clear:both">
 
                                     <div class="form-group">
