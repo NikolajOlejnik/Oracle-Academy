@@ -11,7 +11,7 @@
 
 
     <context:component-scan base-package="main.oracle.academy.fp.dao"/>
-    <context:component-scan base-package="main.oracle.academy.fp.dao.impl"/>
+    <context:component-scan base-package="main.oracle.academy.fp.dao.hibernate"/>
     <context:component-scan base-package="main.oracle.academy.fp.model"/>
     <context:component-scan base-package="main.oracle.academy.fp.service.impl"/>
 

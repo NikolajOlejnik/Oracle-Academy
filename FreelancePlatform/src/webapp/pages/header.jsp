@@ -18,16 +18,16 @@
         </div>
         <ul class="nav navbar-nav">
 
-            <li><a href="/mytasks">Мои задания <i class="fa fa-file-text-o"></i></a></li>
+            <li><a href="/myTasks">Мои задания <i class="fa fa-file-text-o"></i></a></li>
 
 
-            <li><a href="/createtask">Добавить задание <i class="fa fa-plus"></i></a></li>
+            <li><a href="/createTask">Добавить задание <i class="fa fa-plus"></i></a></li>
 
-            <li><a href="/myrequests">Проверить статус заявок <i class="fa fa-calendar-check-o"></i></a></li>
+            <li><a href="/myRequests">Проверить статус заявок <i class="fa fa-calendar-check-o"></i></a></li>
 
 
             <sec:authorize access="isAuthenticated()">
-                <li><a href="/myaccount">Привет, <i class="fa fa-user"></i> ${principal.username}!</a></li>
+                <li><a href="/myAccount">Привет, <i class="fa fa-user"></i> ${principal.username}!</a></li>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <li><a href="/admin">Панель администратора <i class="fa fa-cog"></i> </a></li>
                 </sec:authorize>

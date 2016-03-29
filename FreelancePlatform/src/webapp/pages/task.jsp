@@ -200,7 +200,7 @@
                                         <sec:authorize access="isAuthenticated()">
                                             <c:if test="${task.user.login == principal.username && task.status}">
                                                 <a class="btn btn-success pull-right"
-                                                   href="/task/acceptrequest/${task.id}/${request.id}">Принять запрос
+                                                   href="/task/acceptRequest/${task.id}/${request.id}">Принять запрос
                                                     <em class="fa fa-check-square-o"></em></a>
                                             </c:if>
                                         </sec:authorize>
@@ -228,7 +228,7 @@
                         </button>
                         <div class="collapse">
                             <div class="form-area">
-                                <form role="form" action="/task/${task.id}/sendrequest" method="post" commandName="request">
+                                <form role="form" action="/task/${task.id}/sendRequest" method="post" commandName="request">
                                     <br style="clear:both">
 
                                     <div class="form-group">

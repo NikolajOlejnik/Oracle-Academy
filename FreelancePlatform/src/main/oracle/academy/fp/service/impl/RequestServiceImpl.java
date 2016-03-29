@@ -23,7 +23,6 @@ public class RequestServiceImpl implements RequestService {
     private UserAuthenticationService userAuthenticationService;
 
     @Override
-    @Transactional
     public Request sendRequest(Long taskId, Request request) {
         User user = userAuthenticationService.getCurrentUser();
         request.setUser(user);
@@ -36,7 +35,6 @@ public class RequestServiceImpl implements RequestService {
 
 
     @Override
-    @Transactional(readOnly = true)
     public Request getRequestById(Long requestId) {
         return (Request) requestDao.read(requestId);
     }

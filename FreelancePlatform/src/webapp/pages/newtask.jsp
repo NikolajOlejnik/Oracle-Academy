@@ -18,7 +18,7 @@
 <div class="container-fluid">
   <section class="container">
     <div class="container-page">
-      <form role="form" action="addtask" method="post" commandName="task">
+      <form role="form" action="addTask" method="post" commandName="task">
       <div class="col-md-6">
         <h3 class="dark-grey"> Добавить новое задание </h3>
 

@@ -27,6 +27,10 @@
                     <h3 class="dark-grey">Редактировать профиль</h3>
 
                     <div class="form-group col-lg-12">
+                        <input type="hidden" name="id" class="form-control" value="${user.id}" readonly>
+                    </div>
+
+                    <div class="form-group col-lg-12">
                         <label>Логин</label>
                         <input type="text" name="login" class="form-control" value="${user.login}" readonly>
                     </div>

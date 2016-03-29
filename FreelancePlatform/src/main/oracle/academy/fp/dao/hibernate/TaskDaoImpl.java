@@ -9,6 +9,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
 public class TaskDaoImpl extends BaseDao<Task> implements TaskDao<Task> {
 
     @Override
+    @Transactional
     public List<Task> getAllActual() {
         Criteria criteria = super.getSession().createCriteria(Task.class);
         criteria.add(Restrictions.eq("status", true));
@@ -28,6 +30,7 @@ public class TaskDaoImpl extends BaseDao<Task> implements TaskDao<Task> {
    */
 
     @Override
+    @Transactional
     public Task getTaskWithRequests(Long taskId) {
         Task task = super.read(taskId);
         task.getRequestList().size();

@@ -23,13 +23,9 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
     @Autowired
-    private RequestService requestService;
-    @Autowired
-    private UserAuthenticationService userAuthenticationService;
-    @Autowired
     private UserService userService;
 
-    @RequestMapping(path = "/user/{userId}/tasklist", method = RequestMethod.GET)
+    @RequestMapping(path = "/user/{userId}/taskList", method = RequestMethod.GET)
     public String getUserTaskList(ModelMap model, @PathVariable long userId) {
         try {
             User user = userService.getUserWithTasks(userId);
@@ -39,7 +35,7 @@ public class TaskController {
             e.printStackTrace();
             return "redirect:/404";
         }
-        return "usertasklist";
+        return "userTaskList";
     }
 
 
@@ -50,12 +46,12 @@ public class TaskController {
         return "task";
     }
 
-    @RequestMapping(path = "createtask", method = RequestMethod.GET)
+    @RequestMapping(path = "createTask", method = RequestMethod.GET)
     public String createTask() {
-        return "newtask";
+        return "newTask";
     }
 
-    @RequestMapping(path = "/addtask", method = RequestMethod.POST)
+    @RequestMapping(path = "/addTask", method = RequestMethod.POST)
     public String addNewTask(@ModelAttribute("task") Task task) {
         taskService.create(task);
         return "redirect:/";

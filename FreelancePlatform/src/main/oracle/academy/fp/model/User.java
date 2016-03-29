@@ -39,12 +39,10 @@ public class User implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
-	@OneToMany
-	@JoinColumn(name = "USER_ID")
+	@OneToMany(mappedBy = "user")
 	private List <Task> tasks;
 
-	@OneToMany
-	@JoinColumn(name = "USER_ID")
+	@OneToMany(mappedBy = "user")
 	private List <Request> requests;
 
 	public User() {

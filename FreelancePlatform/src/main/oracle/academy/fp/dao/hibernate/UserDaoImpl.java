@@ -5,6 +5,7 @@ import main.oracle.academy.fp.model.User;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Repository
@@ -14,6 +15,7 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao<User> {
     }
 
     @Override
+    @Transactional
     public User getByLogin(String login) {
         Criteria criteria = super.getSession().createCriteria(User.class);
         criteria.add(Restrictions.eq("login", login));
@@ -25,6 +27,7 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao<User> {
     */
 
     @Override
+    @Transactional
     public User getByLoginWithJoins(String login) {
         Criteria criteria = super.getSession().createCriteria(User.class);
         criteria.add(Restrictions.eq("login", login));
@@ -35,6 +38,7 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao<User> {
     }
 
     @Override
+    @Transactional
     public User getUserWithTasks(long userId) {
         User user = super.read(userId);
         user.getTasks().size();

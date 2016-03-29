@@ -36,7 +36,7 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <a href="/user/${user.id}/tasklist" class="btn btn-primary btn-sm">Размещённые заказы</a>
+                            <a href="/user/${user.id}/taskList" class="btn btn-primary btn-sm">Размещённые заказы</a>
                             <a href="#" class="btn btn-primary btn-sm">Выполненные работы</a>
                         </div>
                     </div>

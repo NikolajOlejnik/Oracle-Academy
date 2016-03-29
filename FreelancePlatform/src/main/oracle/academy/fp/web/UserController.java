@@ -24,25 +24,25 @@ public class UserController {
     @Autowired
     private UserAuthenticationService userAuthenticationService;
 
-    @RequestMapping(path = "/myaccount", method = RequestMethod.GET)
+    @RequestMapping(path = "/myAccount", method = RequestMethod.GET)
     public String getCurrentUserAccount(ModelMap model) {
-        User user = userAuthenticationService.getCurrentUser();
-        model.put("user", user);
+        model.put("user", userAuthenticationService.getCurrentUser());
         return "profile";
     }
 
-    @RequestMapping(path = "/myrequests", method = RequestMethod.GET)
+    @RequestMapping(path = "/myRequests", method = RequestMethod.GET)
     public String getMyRequestsList(ModelMap model) {
         User user = userAuthenticationService.getCurrentUserWithJoins();
         model.put("user", user);
-        return "requestlist";
+        System.out.println("myRequests");
+        return "requestList";
     }
 
-    @RequestMapping(path = "/mytasks", method = RequestMethod.GET)
+    @RequestMapping(path = "/myTasks", method = RequestMethod.GET)
     public String getMyTaskList(ModelMap model) {
         User user = userAuthenticationService.getCurrentUserWithJoins();
         model.put("user", user);
-        return "usertasklist";
+        return "userTaskList";
     }
 
     @RequestMapping(path = "/user/{userId}", method = RequestMethod.GET)
@@ -86,7 +86,7 @@ public class UserController {
                 e.printStackTrace();
                 return "redirect:/404";
             }
-        return "usereditform";
+        return "userEditForm";
     }
 
     @RequestMapping(path = "/user/{userId}/update", method = RequestMethod.POST)
