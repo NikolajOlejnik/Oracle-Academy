@@ -172,6 +172,8 @@
                         <fmt:formatDate pattern="yyyy-MM-dd H:m" value="${task.dateAdded}"/></h6>
                     <h6 class="text-muted time"><i class="fa fa-money"></i> ${task.price}</h6>
                 </div>
+                <div class="post-edit pull-right">
+                </div>
             </div>
             <div class="post-description">
                 ${task.description}
@@ -250,5 +252,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>
