@@ -1,6 +1,6 @@
 package main.oracle.academy.fp.web;
 
-import main.oracle.academy.fp.exceptions.UserException;
+import main.oracle.academy.fp.exception.UserException;
 import main.oracle.academy.fp.model.Role;
 import main.oracle.academy.fp.model.User;
 import main.oracle.academy.fp.service.UserService;

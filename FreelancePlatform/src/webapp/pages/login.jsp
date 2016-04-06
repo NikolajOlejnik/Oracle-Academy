@@ -76,12 +76,7 @@
         <div class="panel-title"><b>Регистрация</b></div>
       </div>
       <div class="panel-body" >
-        <form id="signupform" class="form-horizontal" role="form" action="registration" method="post" commandName="userForm">
-
-          <div id="signupalert" style="display:none" class="alert alert-danger">
-            <p>Error:</p>
-            <span></span>
-          </div>
+        <form id="signupform" class="form-horizontal" role="form" action="/registration" method="post" commandName="userForm">
 
           <div class="form-group">
             <label for="email" class="col-md-3 control-label">E-mail</label>
@@ -136,12 +131,7 @@
         </form>
       </div>
     </div>
-
-
-
-
   </div>
 </div>
-
 </body>
 </html>

@@ -1,9 +1,8 @@
 package main.oracle.academy.fp.service;
 
-import main.oracle.academy.fp.exceptions.RequestException;
-import main.oracle.academy.fp.exceptions.TaskException;
+import main.oracle.academy.fp.exception.RequestException;
+import main.oracle.academy.fp.exception.TaskException;
 import main.oracle.academy.fp.model.Task;
-import main.oracle.academy.fp.model.User;
 
 import java.util.List;
 

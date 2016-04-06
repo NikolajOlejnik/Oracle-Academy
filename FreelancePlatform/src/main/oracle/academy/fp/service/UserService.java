@@ -1,6 +1,6 @@
 package main.oracle.academy.fp.service;
 
-import main.oracle.academy.fp.exceptions.UserException;
+import main.oracle.academy.fp.exception.UserException;
 import main.oracle.academy.fp.model.User;
 
 import java.util.List;
@@ -24,4 +24,5 @@ public interface UserService {
     User getUserWithTasks(long userId) throws UserException;
 
     User getByLoginWithJoins(String login);
+
 }

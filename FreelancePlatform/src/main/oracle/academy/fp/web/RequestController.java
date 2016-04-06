@@ -1,15 +1,13 @@
 package main.oracle.academy.fp.web;
 
-import main.oracle.academy.fp.exceptions.RequestException;
-import main.oracle.academy.fp.exceptions.TaskException;
+import main.oracle.academy.fp.exception.RequestException;
+import main.oracle.academy.fp.exception.TaskException;
 import main.oracle.academy.fp.model.Request;
-import main.oracle.academy.fp.model.User;
 import main.oracle.academy.fp.service.RequestService;
 import main.oracle.academy.fp.service.TaskService;
 import main.oracle.academy.fp.service.impl.UserAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;

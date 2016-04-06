@@ -2,16 +2,14 @@ package main.oracle.academy.fp.service.impl;
 
 import main.oracle.academy.fp.dao.RequestDao;
 import main.oracle.academy.fp.dao.TaskDao;
-import main.oracle.academy.fp.dao.UserDao;
-import main.oracle.academy.fp.exceptions.RequestException;
-import main.oracle.academy.fp.exceptions.TaskException;
+import main.oracle.academy.fp.exception.RequestException;
+import main.oracle.academy.fp.exception.TaskException;
 import main.oracle.academy.fp.model.Request;
 import main.oracle.academy.fp.model.Task;
 import main.oracle.academy.fp.model.User;
 import main.oracle.academy.fp.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;

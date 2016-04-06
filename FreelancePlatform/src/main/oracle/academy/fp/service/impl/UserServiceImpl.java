@@ -1,14 +1,12 @@
 package main.oracle.academy.fp.service.impl;
 
-import main.oracle.academy.fp.dao.Dao;
-import main.oracle.academy.fp.exceptions.UserException;
+import main.oracle.academy.fp.exception.UserException;
 import main.oracle.academy.fp.model.Role;
 import main.oracle.academy.fp.service.UserService;
 import main.oracle.academy.fp.dao.UserDao;
 import main.oracle.academy.fp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -51,6 +49,7 @@ public class UserServiceImpl implements UserService {
     public User getByLoginWithJoins(String login) {
         return (User) userDao.getByLoginWithJoins(login);
     }
+
 
     @Override
     public User getByLogin(String login) {
@@ -98,5 +97,7 @@ public class UserServiceImpl implements UserService {
             userDao.update(user);
         }
     }
+
+
 
 }

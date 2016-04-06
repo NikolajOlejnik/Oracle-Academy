@@ -1,20 +1,17 @@
 package main.oracle.academy.fp.web;
 
-import main.oracle.academy.fp.exceptions.UserException;
+import main.oracle.academy.fp.exception.UserException;
 import main.oracle.academy.fp.model.Role;
 import main.oracle.academy.fp.model.User;
 import main.oracle.academy.fp.service.UserService;
 import main.oracle.academy.fp.service.impl.UserAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 @Controller
 public class UserController {
@@ -34,7 +31,6 @@ public class UserController {
     public String getMyRequestsList(ModelMap model) {
         User user = userAuthenticationService.getCurrentUserWithJoins();
         model.put("user", user);
-        System.out.println("myRequests");
         return "requestList";
     }
 
@@ -68,7 +64,6 @@ public class UserController {
         return "register/success";
     }
 
-
     @RequestMapping(path = "/reg", method = RequestMethod.GET)
     public String regNewUser() {
         return "register";
@@ -100,4 +95,5 @@ public class UserController {
         }
         return "redirect:/user/" + userId;
     }
+
 }
