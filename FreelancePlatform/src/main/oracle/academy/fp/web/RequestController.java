@@ -13,20 +13,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @Controller
+@RequestMapping(value = "/request")
 public class RequestController {
 
     @Autowired
     private RequestService requestService;
     @Autowired
-    private UserAuthenticationService userAuthenticationService;
-    @Autowired
     private TaskService taskService;
-
-    @RequestMapping(path = "/task/{taskId}/sendRequest", method = RequestMethod.POST)
-    public String sendRequest(@PathVariable long taskId, @ModelAttribute("request") Request request, Map<String, Object> model) {
-        requestService.sendRequest(taskId, request);
-        return "redirect:/task/" + request.getTask().getId();
-    }
 
     @RequestMapping(value = "/task/acceptRequest/{taskId}/{requestId}", method = RequestMethod.GET)
     public String acceptRequest(@PathVariable long taskId, @PathVariable long requestId) {

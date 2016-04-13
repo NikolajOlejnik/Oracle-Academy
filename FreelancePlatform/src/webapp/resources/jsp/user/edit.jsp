@@ -18,11 +18,11 @@
 
 </head>
 <body>
-<jsp:include page="header.jsp"/>
+<jsp:include page="../header.jsp"/>
 <div class="container-fluid">
     <section class="container">
         <div class="container-page">
-            <form role="form" action="/user/${user.id}/update" method="post" commandName="editeduser">
+            <form role="form" action="/users/${user.id}" method="post">
                 <div class="col-md-6">
                     <h3 class="dark-grey">Редактировать профиль</h3>
 

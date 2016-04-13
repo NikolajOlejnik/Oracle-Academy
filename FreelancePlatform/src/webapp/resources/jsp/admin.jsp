@@ -52,7 +52,7 @@
                                     <span class="fa-stack">
   <i class="fa fa-pencil fa-stack-1x"></i>
 </span>Редактировать</a>
-                                <a class="btn btn-default" href="/delete/user/${user.id}" >
+                                <a class="btn btn-default" href="/user/${user.id}" method="delete">
                                     <span class="fa-stack">
   <i class="fa fa-user fa-stack-1x"></i>
   <i class="fa fa-ban fa-stack-2x text-danger"></i>

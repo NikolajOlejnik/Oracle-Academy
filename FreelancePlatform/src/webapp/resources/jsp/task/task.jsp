@@ -152,7 +152,7 @@
     </script>
 </head>
 <body>
-<jsp:include page="header.jsp"/>
+<jsp:include page="../header.jsp"/>
 <sec:authentication var="principal" property="principal"/>
 <%--<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">--%>
 <div class="container">
@@ -179,7 +179,7 @@
                 ${task.description}
             </div>
             <div class="post-footer">
-                <sec:authorize access="!isAuthenticated()"> Если хотите оставить заявку - <a href="/login">
+                <sec:authorize access="!isAuthenticated()"> Если хотите оставить заявку - <a href="/user">
                     войдите <i class="fa fa-sign-in"></i>
                     или зарегистрируйтесь <i class="fa fa-user-plus"></i></a> <br> <br> </sec:authorize>
                 <c:if test="${task.requestList.isEmpty()}">
@@ -230,14 +230,12 @@
                         </button>
                         <div class="collapse">
                             <div class="form-area">
-                                <form role="form" action="/task/${task.id}/sendRequest" method="post" commandName="request">
+                                <form role="form" action="/task/${task.id}/request" method="post" >
                                     <br style="clear:both">
-
                                     <div class="form-group">
                                         <textarea class="form-control" name="comment" type="textarea" id="message"
                                                   placeholder="Оставьте комментарий к заявке" maxlength="140"
                                                   rows="7"></textarea>
-                                        <input type="hidden" name="taskId" value="${task.id}"/>
                                         <span class="help-block"><p id="characterLeft" class="help-block ">Вы достигли
                                             лимита</p></span>
                                     </div>

@@ -14,11 +14,11 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 <body>
-<jsp:include page="header.jsp"/>
+<jsp:include page="../header.jsp"/>
 <div class="container-fluid">
   <section class="container">
     <div class="container-page">
-      <form role="form" action="addTask" method="post" commandName="task">
+      <form role="form" action="/task" method="post">
       <div class="col-md-6">
         <h3 class="dark-grey"> Добавить новое задание </h3>
 

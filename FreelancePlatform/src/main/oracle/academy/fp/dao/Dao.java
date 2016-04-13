@@ -4,7 +4,7 @@ import java.util.Collection;
 
 public interface Dao <Entity> {
 
-    public void add(Entity instance);
+    public void create(Entity instance);
 
     public Entity read (Long id);
 

@@ -8,7 +8,6 @@ import main.oracle.academy.fp.model.User;
 import main.oracle.academy.fp.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -25,11 +24,11 @@ public class RequestServiceImpl implements RequestService {
     @Override
     public Request sendRequest(Long taskId, Request request) {
         User user = userAuthenticationService.getCurrentUser();
-        request.setUser(user);
         request.setTask((Task) taskDao.read(taskId));
+        request.setUser(user);
         request.setDateAdded(new Date());
         request.setStatus(false);
-        requestDao.add(request);
+        requestDao.create(request);
         return request;
     }
 

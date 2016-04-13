@@ -8,10 +8,10 @@
     <title>404</title>
 </head>
 <body>
-<jsp:include page="header.jsp"/>
+<jsp:include page="../header.jsp"/>
 
 <div class="container">
-<img src="/resources/images/404.png" align="middle"></div>
+<img src="/webapp/resources/images/404.png" align="middle"></div>
 </body>
 </html>
 

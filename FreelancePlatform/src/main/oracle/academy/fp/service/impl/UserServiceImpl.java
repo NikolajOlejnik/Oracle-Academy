@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User create(User user) {
         user.setEnabled(true);
-        userDao.add(user);
+        userDao.create(user);
         return user;
     }
 

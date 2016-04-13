@@ -31,7 +31,7 @@ public class TaskServiceImpl implements TaskService {
         task.setUser(user);
         task.setDateAdded(new Date());
         task.setStatus(true);
-        taskDao.add(task);
+        taskDao.create(task);
         return task;
     }
 
@@ -45,6 +45,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task getById(Long taskId) {
+        System.out.println(taskDao.read(taskId));
         return (Task) taskDao.read(taskId);
     }
 

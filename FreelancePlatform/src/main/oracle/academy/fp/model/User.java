@@ -1,6 +1,10 @@
 package main.oracle.academy.fp.model;
 
+import org.hibernate.validator.constraints.Email;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
@@ -14,15 +18,23 @@ public class User implements Serializable {
 	private Long id;
 
 	@Column(name = "LOGIN", unique=true)
+	@NotNull(message = "Введите логин!")
+	@Size(min=1, max=10, message = "Длина логина должна быть от 1 до 10 символов!")
 	private String login;
 
 	@Column(name = "PASSWORD")
+	@NotNull(message = "Введите пароль!")
+	@Size(min=1, max=10, message = "Длина пароля должна быть от 1 до 10 символов!")
 	private String password;
 
 	@Column(name = "EMAIL")
+	@NotNull(message = "Введите ваш e-mail!")
+	@Email(message = "Введите корректный e-mail!")
 	private String email;
 
 	@Column(name = "NAME")
+	@NotNull
+	@Size(min=2, max=40, message = "Длина имени должна быть от 2 до 40 символов!")
 	private String name;
 
 	@Column(name = "ABOUT")

@@ -13,7 +13,7 @@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/resources/css/background.css">
+  <link rel="stylesheet" href="/webapp/resources/css/background.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
@@ -76,7 +76,7 @@
         <div class="panel-title"><b>Регистрация</b></div>
       </div>
       <div class="panel-body" >
-        <form id="signupform" class="form-horizontal" role="form" action="/registration" method="post" commandName="userForm">
+        <form id="signupform" class="form-horizontal" role="form" action="/user" method="post" >
 
           <div class="form-group">
             <label for="email" class="col-md-3 control-label">E-mail</label>
@@ -91,12 +91,14 @@
               <input type="text" class="form-control" name="login" placeholder="придумайте логин">
             </div>
           </div>
+
           <div class="form-group">
             <label for="password" class="col-md-3 control-label">Пароль</label>
             <div class="col-md-9">
               <input type="password" class="form-control" name="password" placeholder="придумайте пароль">
             </div>
           </div>
+
           <div class="form-group">
             <label for="name" class="col-md-3 control-label">Ваше имя</label>
             <div class="col-md-9">

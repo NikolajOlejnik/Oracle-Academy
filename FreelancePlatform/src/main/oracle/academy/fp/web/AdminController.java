@@ -26,7 +26,7 @@ public class AdminController {
         return "admin";
     }
 
-    @RequestMapping(path = "/delete/user/{userId}", method = RequestMethod.GET)
+    @RequestMapping(path = "users/{userId}", method = RequestMethod.DELETE)
     public String getUserDelete(@PathVariable long userId) {
         try {
             userService.delete(userId);
