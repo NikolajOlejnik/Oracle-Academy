@@ -1,4 +1,6 @@
-﻿Simple Spring/JPA web-application with authorization and access permission.
+![alt tag](http://www.longleafalliance.org/photos/misc/workInProgress.gif/image)
+
+Simple Spring/JPA web-application with authorization and access permission.
 
 The application had developed during the course of Java Enterprise Technologies by Oracle Academy @ KhNURE.
 
