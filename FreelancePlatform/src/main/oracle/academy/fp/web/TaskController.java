@@ -1,5 +1,7 @@
 package main.oracle.academy.fp.web;
 
+import main.oracle.academy.fp.exception.RequestException;
+import main.oracle.academy.fp.exception.TaskException;
 import main.oracle.academy.fp.model.Request;
 import main.oracle.academy.fp.model.Task;
 import main.oracle.academy.fp.service.RequestService;
@@ -28,7 +30,7 @@ public class TaskController {
     @RequestMapping(method = RequestMethod.POST)
     public String addNewTask(Task task) {
         taskService.create(task);
-        return "redirect:/";
+        return "redirect:/tasks/" + task.getId();
     }
 
     @RequestMapping(path = "/{taskId}", method = RequestMethod.GET)
@@ -42,6 +44,18 @@ public class TaskController {
     public String sendRequest(@PathVariable long taskId, Request request) {
         requestService.sendRequest(taskId, request);
         return "redirect:/task/" + request.getTask().getId();
+    }
+
+    @RequestMapping(value = "/{taskId}/accept/{requestId}", method = RequestMethod.GET)
+    public String acceptRequest(@PathVariable long taskId, @PathVariable long requestId) {
+        Request request = requestService.getRequestById(requestId);
+        try {
+            taskService.acceptRequest(taskId, requestId);
+        } catch (TaskException | RequestException e) {
+            e.printStackTrace();
+            return "redirect:/404";
+        }
+        return "redirect:/user/" + request.getUser().getId();
     }
 
 }

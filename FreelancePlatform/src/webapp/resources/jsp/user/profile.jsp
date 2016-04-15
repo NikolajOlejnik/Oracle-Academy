@@ -36,13 +36,13 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <a href="/user/${user.id}/taskList" class="btn btn-primary btn-sm">Размещённые заказы</a>
+                            <a href="/users/${user.id}/tasks" class="btn btn-primary btn-sm">Размещённые заказы</a>
                             <a href="#" class="btn btn-primary btn-sm">Выполненные работы</a>
                         </div>
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <a class="btn btn-warning btn-sm" href="/user/${user.id}/edit" >
+                    <a class="btn btn-warning btn-sm" href="/users/${user.id}/edit" >
                             <i class="fa fa-pencil"></i>
                         Редактировать профиль
                     </a>

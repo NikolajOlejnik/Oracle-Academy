@@ -98,7 +98,7 @@
                             <td width="150"><fmt:formatDate pattern="yyyy-MM-dd H:m" value="${task.dateAdded}"/></td>
                             <td>${task.title}</td>
                             <td>${task.price}</td>
-                            <td><a href="/task/${task.id}" method="GET" class="btn btn-default center-block">Перейти на
+                            <td><a href="/tasks/${task.id}" method="GET" class="btn btn-default center-block">Перейти на
                                 страницу задания <i class="fa fa-caret-square-o-right"></i>
                             </a>
                             </td>

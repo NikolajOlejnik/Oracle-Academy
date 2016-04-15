@@ -99,7 +99,7 @@ public class UserController {
             e.printStackTrace();
             return "redirect:/404";
         }
-        return "redirect:/user/" + userId;
+        return "redirect:/users/" + userId;
     }
 
 }

@@ -11,7 +11,7 @@
 <jsp:include page="../header.jsp"/>
 
 <div class="container">
-<img src="/webapp/resources/images/404.png" align="middle"></div>
+<img src="/resources/images/404.png" align="middle"></div>
 </body>
 </html>
 

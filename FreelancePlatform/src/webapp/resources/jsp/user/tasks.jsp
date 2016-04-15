@@ -60,7 +60,7 @@
               <td><fmt:formatDate pattern="yyyy-MM-dd H:m" value="${task.dateAdded}"/></td>
               <td>${task.title}</td>
               <td>
-                <a href="/task/${task.id}" method="GET">
+                <a href="/tasks/${task.id}" method="GET">
 
               <c:if test="${task.status}">
                  <b>Задание всё ещё актуально <i class="fa fa-caret-square-o-right"></i>

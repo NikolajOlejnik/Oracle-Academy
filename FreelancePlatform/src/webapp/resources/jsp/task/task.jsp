@@ -165,7 +165,7 @@
                 </div>
                 <div class="pull-left meta">
                     <div class="title h5">
-                        <a href="/user/${task.user.id}"><b>${task.user.name}</b></a>
+                        <a href="/users/${task.user.id}"><b>${task.user.name}</b></a>
                         предложил работу:
                     </div>
                     <h6 class="text-muted time"><i class="fa fa-clock-o"></i>
@@ -179,7 +179,7 @@
                 ${task.description}
             </div>
             <div class="post-footer">
-                <sec:authorize access="!isAuthenticated()"> Если хотите оставить заявку - <a href="/user">
+                <sec:authorize access="!isAuthenticated()"> Если хотите оставить заявку - <a href="/login">
                     войдите <i class="fa fa-sign-in"></i>
                     или зарегистрируйтесь <i class="fa fa-user-plus"></i></a> <br> <br> </sec:authorize>
                 <c:if test="${task.requestList.isEmpty()}">
@@ -193,7 +193,7 @@
                             <c:forEach items="${task.requestList}" var="request">
                                 <li class="comment panel-shadow panel-white">
 
-                                    <a class="pull-left" href="/user/${request.user.id}">
+                                    <a class="pull-left" href="/users/${request.user.id}">
                                         <img class="avatar" src="../resources/images/anonymous.png"
                                              alt="avatar">
                                     </a>
@@ -201,15 +201,14 @@
                                     <div class="comment-body">
                                         <sec:authorize access="isAuthenticated()">
                                             <c:if test="${task.user.login == principal.username && task.status}">
-                                                <a class="btn btn-success pull-right"
-                                                   href="/task/acceptRequest/${task.id}/${request.id}">Принять запрос
+                                                <a action="tasks/${task.id}/accept/${request.id}" class="btn btn-success pull-right">Принять запрос
                                                     <em class="fa fa-check-square-o"></em></a>
                                             </c:if>
                                         </sec:authorize>
 
                                         <div class="comment-heading">
                                             <div class="title h4"><a
-                                                    href="/user/${request.user.id}"> ${request.user.name} </a></div>
+                                                    href="/users/${request.user.id}"> ${request.user.name} </a></div>
                                             <h5 class="time"><fmt:formatDate pattern="yyyy-MM-dd H:mm"
                                                                              value="${request.dateAdded}"/></h5>
 
@@ -230,7 +229,7 @@
                         </button>
                         <div class="collapse">
                             <div class="form-area">
-                                <form role="form" action="/task/${task.id}/request" method="post" >
+                                <form role="form" action="/tasks/${task.id}/request" method="post" >
                                     <br style="clear:both">
                                     <div class="form-group">
                                         <textarea class="form-control" name="comment" type="textarea" id="message"
