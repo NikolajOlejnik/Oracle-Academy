@@ -20,7 +20,7 @@ Hibernate,
 Spring Data,
 MySQL
 
-View:
+UI:
 JSP + JSTL,
 Bootstrap(JavaScript + jQuery, CSS)
 
