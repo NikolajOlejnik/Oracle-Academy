@@ -24,7 +24,7 @@ public class TaskController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String getTaskCreateForm() {
-        return "task/create";
+        return "tasks/create";
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -35,15 +35,15 @@ public class TaskController {
 
     @RequestMapping(path = "/{taskId}", method = RequestMethod.GET)
     public String getTask(Model model, @PathVariable long taskId) {
-        Task task = taskService.getTaskWithRequests(taskId);
+        Task task = taskService.getById(taskId);
         model.addAttribute("task", task);
-        return "task/task";
+        return "tasks/task";
     }
 
     @RequestMapping(path = "/{taskId}/request", method = RequestMethod.POST)
     public String sendRequest(@PathVariable long taskId, Request request) {
         requestService.sendRequest(taskId, request);
-        return "redirect:/task/" + request.getTask().getId();
+        return "redirect:/tasks/" + request.getTask().getId();
     }
 
     @RequestMapping(value = "/{taskId}/accept/{requestId}", method = RequestMethod.GET)
@@ -55,7 +55,7 @@ public class TaskController {
             e.printStackTrace();
             return "redirect:/404";
         }
-        return "redirect:/user/" + request.getUser().getId();
+        return "redirect:/users/" + request.getUser().getId();
     }
 
 }

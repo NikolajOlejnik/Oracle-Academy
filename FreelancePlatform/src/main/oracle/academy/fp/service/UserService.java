@@ -11,7 +11,7 @@ public interface UserService {
 
     User getById(Long id) throws UserException;
 
-    User getByLogin (String login);
+    User findByLogin(String login);
 
     void delete(Long id) throws UserException;
 
@@ -20,9 +20,5 @@ public interface UserService {
     List<User> getUsersList();
 
     void makeAdmin(long userId) throws UserException;
-
-    User getUserWithTasks(long userId) throws UserException;
-
-    User getByLoginWithJoins(String login);
 
 }

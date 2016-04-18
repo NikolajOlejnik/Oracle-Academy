@@ -2,99 +2,96 @@ package main.oracle.academy.fp.service.impl;
 
 import main.oracle.academy.fp.exception.UserException;
 import main.oracle.academy.fp.model.Role;
+import main.oracle.academy.fp.repository.UserRepository;
 import main.oracle.academy.fp.service.UserService;
-import main.oracle.academy.fp.dao.UserDao;
 import main.oracle.academy.fp.model.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
 
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserDao userDao;
+    private UserRepository userRepository;
 
     @Autowired
     private UserAuthenticationService userAuthenticationService;
 
+    @Transactional
     @Override
     public User create(User user) {
         user.setEnabled(true);
-        userDao.create(user);
+        userRepository.save(user);
         return user;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public User getById(Long id) throws UserException {
-        User user = (User) userDao.read(id);
+        User user = userRepository.getOne(id);
         if (user == null) {
             throw new UserException();
         }
         return user;
     }
 
+    @Transactional(readOnly = true)
     @Override
-    public User getUserWithTasks(long userId) throws UserException {
-        User user = (User) userDao.getUserWithTasks(userId);
-        if (user == null) {
-            throw new UserException();
-        }
+    public User findByLogin(String login) {
+        User user = userRepository.findByLogin(login);
+        user.getTasks().size();
+        user.getRequests().size();
         return user;
     }
 
-    @Override
-    public User getByLoginWithJoins(String login) {
-        return (User) userDao.getByLoginWithJoins(login);
-    }
-
-
-    @Override
-    public User getByLogin(String login) {
-        return (User) userDao.getByLogin(login);
-    }
-
+    @Transactional
     @Override
     public void delete(Long id) throws UserException {
-        User user = (User) userDao.read(id);
+        User user = userRepository.getOne(id);
         if (user != null) {
-            userDao.delete(user.getId());
+            userRepository.delete(user.getId());
         } else {
             throw new UserException();
         }
     }
 
+    @Transactional
     @Override
     public User update(Long userId, User userToUpdate) throws UserException {
         User currentUser = userAuthenticationService.getCurrentUser();
         if (currentUser.getId() == userId) {
             userToUpdate.setRole(currentUser.getRole());
-            userDao.update(userToUpdate);
+            userRepository.save(userToUpdate);
             return userToUpdate;
         } else if (currentUser.getRole() == Role.ROLE_ADMIN) {
-            userDao.update(userToUpdate);
+            userRepository.save(userToUpdate);
             return userToUpdate;
         } else {
                 throw new UserException();
         }
     }
 
+    @Transactional(readOnly = true)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Override
     public List<User> getUsersList() {
-
-        return (List<User>) userDao.getAll();
+        return userRepository.getAll();
     }
 
+    @Transactional
     @Override
     public void makeAdmin(long userId) throws UserException {
-        User user = (User) userDao.read(userId);
+        User user = userRepository.getOne(userId);
         if (user == null) {
             throw new UserException();
         } else {
             user.setRole(Role.ROLE_ADMIN);
-            userDao.update(user);
+            userRepository.save(user);
         }
     }
 

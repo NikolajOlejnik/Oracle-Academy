@@ -15,7 +15,7 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../fragments/header.jsp"/>
 <div class="container">
   <div class="row">
 

@@ -1,13 +1,13 @@
 package main.oracle.academy.fp.service.impl;
 
-import main.oracle.academy.fp.dao.RequestDao;
-import main.oracle.academy.fp.dao.TaskDao;
 import main.oracle.academy.fp.model.Request;
-import main.oracle.academy.fp.model.Task;
 import main.oracle.academy.fp.model.User;
+import main.oracle.academy.fp.repository.RequestRepository;
+import main.oracle.academy.fp.repository.TaskRepository;
 import main.oracle.academy.fp.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -15,27 +15,28 @@ import java.util.Date;
 public class RequestServiceImpl implements RequestService {
 
     @Autowired
-    private RequestDao requestDao;
+    private RequestRepository requestRepository;
     @Autowired
-    private TaskDao taskDao;
+    private TaskRepository taskRepository;
     @Autowired
     private UserAuthenticationService userAuthenticationService;
 
+    @Transactional
     @Override
     public Request sendRequest(Long taskId, Request request) {
         User user = userAuthenticationService.getCurrentUser();
-        request.setTask((Task) taskDao.read(taskId));
+        request.setTask(taskRepository.getOne(taskId));
         request.setUser(user);
         request.setDateAdded(new Date());
         request.setStatus(false);
-        requestDao.create(request);
+        requestRepository.save(request);
         return request;
     }
 
-
+    @Transactional(readOnly = true)
     @Override
     public Request getRequestById(Long requestId) {
-        return (Request) requestDao.read(requestId);
+        return requestRepository.getOne(requestId);
     }
 
 }

@@ -20,12 +20,6 @@ public class AdminController {
     @Autowired
     private UserAuthenticationService userAuthenticationService;
 
-    @RequestMapping(path = "/admin", method = RequestMethod.GET)
-    public String getUserList(ModelMap model) {
-        model.put("usersList", userService.getUsersList());
-        return "admin";
-    }
-
     @RequestMapping(path = "users/{userId}", method = RequestMethod.DELETE)
     public String getUserDelete(@PathVariable long userId) {
         try {
@@ -37,7 +31,7 @@ public class AdminController {
         }
     }
 
-    @RequestMapping(path = "/makeadmin/user/{userId}", method = RequestMethod.GET)
+    @RequestMapping(path = "/makeadmin/users/{userId}", method = RequestMethod.GET)
     public String makeAdmin (@PathVariable long userId) {
         User user = userAuthenticationService.getCurrentUser();
         if (user.getRole() != Role.ROLE_ADMIN) {

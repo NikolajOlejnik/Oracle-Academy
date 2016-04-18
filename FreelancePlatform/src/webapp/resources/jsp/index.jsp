@@ -55,7 +55,7 @@
 </head>
 
 <body>
-<jsp:include page="header.jsp"/>
+<jsp:include page="fragments/header.jsp"/>
 
 <div class="container">
 

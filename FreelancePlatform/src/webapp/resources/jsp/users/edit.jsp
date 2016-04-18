@@ -18,7 +18,7 @@
 
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../fragments/header.jsp"/>
 <div class="container-fluid">
     <section class="container">
         <div class="container-page">

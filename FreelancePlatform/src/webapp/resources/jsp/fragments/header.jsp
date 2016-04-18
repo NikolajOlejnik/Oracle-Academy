@@ -28,7 +28,7 @@
             <sec:authorize access="isAuthenticated()">
                 <li><a href="/users/profile">Привет, <i class="fa fa-user"></i> ${principal.username}!</a></li>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
-                    <li><a href="/admin">Панель администратора <i class="fa fa-cog"></i> </a></li>
+                    <li><a href="/users">Панель администратора <i class="fa fa-cog"></i> </a></li>
                 </sec:authorize>
                 <li><a href="/logout">Выйти <i class="fa fa-sign-out"></i></a></li>
             </sec:authorize>

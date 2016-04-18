@@ -8,10 +8,11 @@
     <title>404</title>
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../fragments/header.jsp"/>
 
 <div class="container">
-<img src="/resources/images/404.png" align="middle"></div>
+    404 Not Found <br> <br>
+    <img src="/resources/images/error.jpg" align="middle"></div>
 </body>
 </html>
 

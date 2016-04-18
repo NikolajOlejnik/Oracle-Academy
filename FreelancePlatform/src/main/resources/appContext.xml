@@ -10,12 +10,9 @@
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 
-    <context:component-scan base-package="main.oracle.academy.fp.dao"/>
-    <context:component-scan base-package="main.oracle.academy.fp.dao.hibernate"/>
-    <context:component-scan base-package="main.oracle.academy.fp.model"/>
-    <context:component-scan base-package="main.oracle.academy.fp.service.impl"/>
+    <context:component-scan base-package="main.oracle.academy.fp"/>
 
-    <import resource="dbContext.xml"/>
+    <import resource="databaseContext.xml"/>
     <import resource="securityContext.xml"/>
 
 </beans>

@@ -6,6 +6,7 @@ import main.oracle.academy.fp.model.User;
 import main.oracle.academy.fp.service.UserService;
 import main.oracle.academy.fp.service.impl.UserAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -22,10 +23,16 @@ public class UserController {
     @Autowired
     private UserAuthenticationService userAuthenticationService;
 
+    @RequestMapping(method = RequestMethod.GET)
+    public String getUserList(ModelMap model) {
+        model.put("usersList", userService.getUsersList());
+        return "admin/usersList";
+    }
+
     @RequestMapping(method = RequestMethod.POST)
-    public String addUser(@Valid User user, BindingResult result) {
+    public String registerNewUser (@Valid User user, BindingResult result) {
         if (result.hasErrors()) {
-            return "auth/error";
+            return "auth/errors";
         }
         System.out.println(user);
         userService.create(user);
@@ -38,66 +45,65 @@ public class UserController {
             model.addAttribute("user", userService.getById(userId));
         } catch (UserException e) {
             e.printStackTrace();
-            return "redirect:/404";
+            return "redirect:/errors/404";
         }
-        return "user/profile";
+        return "users/profile";
     }
 
     @RequestMapping(path = "/profile", method = RequestMethod.GET)
-    public String getCurrentUserAccount(ModelMap model) {
+    public String getCurrentUserProfile(ModelMap model) {
         model.addAttribute("user", userAuthenticationService.getCurrentUser());
-        return "user/profile";
+        return "users/profile";
     }
 
     @RequestMapping(path = "/requests", method = RequestMethod.GET)
-    public String getMyRequestsList(Model model) {
-        User user = userAuthenticationService.getCurrentUserWithJoins();
+    public String getCurrentUserRequests(Model model) {
+        User user = userAuthenticationService.getCurrentUser();
         model.addAttribute("user", user);
-        return "user/requests";
+        return "users/requests";
     }
 
     @RequestMapping(path = "/tasks", method = RequestMethod.GET)
-    public String getMyTaskList(Model model) {
-        User user = userAuthenticationService.getCurrentUserWithJoins();
+    public String getCurrentUserTasks(Model model) {
+        User user = userAuthenticationService.getCurrentUser();
         model.addAttribute("user", user);
-        return "user/tasks";
+        return "users/tasks";
     }
 
     @RequestMapping(path = "/{userId}/tasks", method = RequestMethod.GET)
-    public String getUserTaskList(Model model, @PathVariable long userId) {
+    public String getUserTasks(Model model, @PathVariable long userId) {
         try {
-            User user = userService.getUserWithTasks(userId);
-            model.addAttribute("user", user);
+            model.addAttribute("user", userService.getById(userId));
         } catch (UserException e) {
             e.printStackTrace();
-            return "redirect:/404";
+            return "redirect:/errors/404";
         }
-        return "user/tasks";
+        return "users/tasks";
     }
 
     @RequestMapping(path = "/{userId}/edit", method = RequestMethod.GET)
-    public String editUser(Model model, @PathVariable long userId) {
+    public String getUserEditForm (Model model, @PathVariable long userId) {
         User user = userAuthenticationService.getCurrentUser();
         if (user.getRole() == Role.ROLE_USER && user.getId() != userId) {
-            return "redirect:/403";
+            return "redirect:/errors/403";
         } else
             try {
                 model.addAttribute(userService.getById(userId));
             } catch (UserException e) {
                 e.printStackTrace();
-                return "redirect:/404";
+                return "redirect:/errors/404";
             }
-        return "user/edit";
+        return "users/edit";
     }
 
     @RequestMapping(path = "/{userId}", method = RequestMethod.POST)
-    public String edit(User user, @PathVariable Long userId, Model model) {
+    public String editUser (User user, @PathVariable Long userId, Model model) {
         try {
             userService.update(userId, user);
             model.addAttribute(userService.getById(user.getId()));
         } catch (UserException e) {
             e.printStackTrace();
-            return "redirect:/404";
+            return "redirect:/errors/404";
         }
         return "redirect:/users/" + userId;
     }

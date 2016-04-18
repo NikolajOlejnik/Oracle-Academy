@@ -21,7 +21,7 @@ public class UserAuthenticationService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = userService.getByLogin(s);
+        User user = userService.findByLogin(s);
         Set<GrantedAuthority> roles = new HashSet();
         roles.add(new SimpleGrantedAuthority(user.getRole().toString()));
 
@@ -33,12 +33,7 @@ public class UserAuthenticationService implements UserDetailsService {
     public User getCurrentUser ()  {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDetails currentUserDetails = (UserDetails) principal;
-        return userService.getByLogin(currentUserDetails.getUsername());
+        return userService.findByLogin(currentUserDetails.getUsername());
     }
 
-    public User getCurrentUserWithJoins() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDetails currentUserDetails = (UserDetails) principal;
-        return userService.getByLoginWithJoins(currentUserDetails.getUsername());
-    }
 }

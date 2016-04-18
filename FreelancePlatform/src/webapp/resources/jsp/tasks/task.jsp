@@ -152,7 +152,7 @@
     </script>
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../fragments/header.jsp"/>
 <sec:authentication var="principal" property="principal"/>
 <%--<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">--%>
 <div class="container">
@@ -199,12 +199,7 @@
                                     </a>
 
                                     <div class="comment-body">
-                                        <sec:authorize access="isAuthenticated()">
-                                            <c:if test="${task.user.login == principal.username && task.status}">
-                                                <a action="tasks/${task.id}/accept/${request.id}" class="btn btn-success pull-right">Принять запрос
-                                                    <em class="fa fa-check-square-o"></em></a>
-                                            </c:if>
-                                        </sec:authorize>
+
 
                                         <div class="comment-heading">
                                             <div class="title h4"><a
@@ -215,6 +210,14 @@
                                         </div>
                                         <p>${request.comment}
                                         </p>
+
+                                        <sec:authorize access="isAuthenticated()">
+                                            <c:if test="${task.user.login == principal.username && task.status}">
+                                                <a href="${task.id}/accept/${request.id}" class="btn btn-success pull-right">Принять запрос
+                                                    <em class="fa fa-check-square-o"></em></a>
+                                            </c:if>
+                                        </sec:authorize>
+
                                     </div>
                                 </li>
                             </c:forEach>
