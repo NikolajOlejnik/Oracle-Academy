@@ -16,18 +16,18 @@ Core:
 Spring (IoC/DI, MVC)
 
 Data:
-Hibernate
-Spring Data
+Hibernate,
+Spring Data,
 MySQL
 
 View:
-JSP + JSTL;
+JSP + JSTL,
 Bootstrap(JavaScript + jQuery, CSS)
 
 Security:
 Spring Security
 
 Testing:
-Mockito;
+Mockito,
 Junit
 
