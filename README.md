@@ -16,7 +16,8 @@ Core:
 Spring (IoC/DI, MVC)
 
 Data:
-Hibernate/Spring Data
+Hibernate
+Spring Data
 MySQL
 
 View:
