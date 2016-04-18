@@ -1,6 +1,6 @@
 ![alt tag](http://www.longleafalliance.org/photos/misc/workInProgress.gif/image)
 
-Simple Spring/JPA web-application with authorization and access permission.
+Simple RESTful web-application with authorization and access permission.
 
 The application had developed during the course of Java Enterprise Technologies by Oracle Academy @ KhNURE.
 
@@ -16,8 +16,7 @@ Core:
 Spring (IoC/DI, MVC)
 
 Data:
-JPA(Hibernate);
-Criteria API;
+Hibernate/Spring Data
 MySQL
 
 View:
