@@ -85,13 +85,13 @@ public class UserController {
     public String getUserEditForm (Model model, @PathVariable long userId) {
         User user = userAuthenticationService.getCurrentUser();
         if (user.getRole() == Role.ROLE_USER && user.getId() != userId) {
-            return "redirect:/errors/403";
+            return "redirect:/403";
         } else
             try {
                 model.addAttribute(userService.getById(userId));
             } catch (UserException e) {
                 e.printStackTrace();
-                return "redirect:/errors/404";
+                return "redirect:/404";
             }
         return "users/edit";
     }
@@ -103,7 +103,7 @@ public class UserController {
             model.addAttribute(userService.getById(user.getId()));
         } catch (UserException e) {
             e.printStackTrace();
-            return "redirect:/errors/404";
+            return "redirect:/404";
         }
         return "redirect:/users/" + userId;
     }

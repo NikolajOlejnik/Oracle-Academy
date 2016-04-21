@@ -51,17 +51,6 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void delete(Long id) throws UserException {
-        User user = userRepository.getOne(id);
-        if (user != null) {
-            userRepository.delete(user.getId());
-        } else {
-            throw new UserException();
-        }
-    }
-
-    @Transactional
-    @Override
     public User update(Long userId, User userToUpdate) throws UserException {
         User currentUser = userAuthenticationService.getCurrentUser();
         if (currentUser.getId() == userId) {
@@ -95,6 +84,17 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+//    TODO:
+//    @Transactional
+//    @Override
+//    public void delete(Long id) throws UserException {
+//        User user = userRepository.findById(id);
+//        if (user != null) {
+//            userRepository.delete(user.getId());
+//        } else {
+//            throw new UserException();
+//        }
+//    }
 
 
 }

@@ -25,6 +25,8 @@ public class Request implements Serializable {
     @Column(name = "COMMENT")
     private String comment;
 
+//TODO: convert to Java 8 Time
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "DATE_ADDED")
     private Date dateAdded;

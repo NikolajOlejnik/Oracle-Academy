@@ -6,6 +6,11 @@ import main.oracle.academy.fp.model.Task;
 
 import java.util.List;
 
+/**
+ * Provides all of business operations with <code>Task</code> objects that we’re interested in.
+ * Also provides all transactions.
+ *
+ */
 public interface TaskService {
     Task create (Task task);
     Task update (Task task) throws TaskException;

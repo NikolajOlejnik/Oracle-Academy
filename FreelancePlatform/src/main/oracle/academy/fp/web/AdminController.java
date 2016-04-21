@@ -20,16 +20,17 @@ public class AdminController {
     @Autowired
     private UserAuthenticationService userAuthenticationService;
 
-    @RequestMapping(path = "users/{userId}", method = RequestMethod.DELETE)
-    public String getUserDelete(@PathVariable long userId) {
-        try {
-            userService.delete(userId);
-            return "redirect:/admin";
-        } catch (UserException e) {
-            e.printStackTrace();
-            return "redirect:/404";
-        }
-    }
+//TODO!!!
+//    @RequestMapping(path = "users/{userId}", method = RequestMethod.DELETE)
+//    public String getUserDelete(@PathVariable long userId) {
+//        try {
+//            userService.delete(userId);
+//            return "redirect:/admin";
+//        } catch (UserException e) {
+//            e.printStackTrace();
+//            return "redirect:/404";
+//        }
+//    }
 
     @RequestMapping(path = "/makeadmin/users/{userId}", method = RequestMethod.GET)
     public String makeAdmin (@PathVariable long userId) {
