@@ -31,6 +31,7 @@ public class Task implements Serializable {
     @Column(name = "DESCRIPTION")
     private String description;
 
+    //TODO: convert to Java 8 Time
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "DATE_ADDED")
     private Date dateAdded;
@@ -104,16 +105,6 @@ public class Task implements Serializable {
     public void setStatus(Boolean status) {
         this.status = status;
     }
-
-
-
-    //    public List<Request> getRequests() {
-//        return requests;
-//    }
-//
-//    public void setRequests(List<Request> requests) {
-//        this.requests = requests;
-//    }
 
     @Override
     public String toString() {
